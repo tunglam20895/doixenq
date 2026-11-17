@@ -57,7 +57,7 @@ test("khách lọc xe, đặt và tra cứu; không còn phần 3D", async ({
   await expect(page.getByRole("link", { name: "Tải QR về máy" })).toHaveAttribute("download", `tra-cuu-${code}.png`);
   const followHref = await page.getByRole("link", { name: "Theo dõi chuyến xe", exact: true }).getAttribute("href");
   const QRCode = await import("qrcode");
-  const matrix = QRCode.create(new URL(followHref!, page.url()).href, { errorCorrectionLevel: "M" }).modules;
+  const matrix = QRCode.create(new URL(followHref!, "https://www.doixenq.com").href, { errorCorrectionLevel: "M" }).modules;
   const matches = await qr.evaluate(async (element, expected) => {
     const image = element as HTMLImageElement;
     await image.decode();

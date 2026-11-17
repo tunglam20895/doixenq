@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { siteUrl } from "@/lib/site";
 
 export default function TripLookupQR({
   id,
@@ -16,7 +17,7 @@ export default function TripLookupQR({
     let active = true;
     setImage("");
     setError(false);
-    const url = new URL("/tra-cuu", window.location.origin);
+    const url = new URL("/tra-cuu", siteUrl);
     url.searchParams.set("ma", id);
     url.searchParams.set("token", token);
     import("qrcode")

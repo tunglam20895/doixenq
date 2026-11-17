@@ -8,7 +8,7 @@ export default function BookingQR() {
         <a className="admin-btn primary" href="/api/booking-qr?download=1" download="qr-dat-xe.svg">Tải mã QR để in</a>
         <a className="admin-btn" href="/dat-xe" target="_blank" rel="noreferrer">Mở trang đặt xe</a>
       </div>
-      <p className="admin-footnote">QR dùng địa chỉ website trong APP_URL. Hãy quét thử trên điện thoại trước khi in.</p>
+      <p className="admin-footnote">QR mở https://www.doixenq.com/dat-xe. Hãy tải mã mới và quét thử trên điện thoại trước khi in.</p>
     </section>
   );
 }

@@ -1,7 +1,8 @@
 import QRCode from "qrcode";
+import { siteUrl } from "@/lib/site";
 export const runtime = "nodejs";
 export async function GET(request: Request) {
-  const url = new URL("/dat-xe", process.env.APP_URL || new URL(request.url).origin);
+  const url = new URL("/dat-xe", siteUrl);
   const svg = await QRCode.toString(url.href, {
     type: "svg", errorCorrectionLevel: "M", margin: 4, width: 800,
   });

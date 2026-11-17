@@ -1,1 +1,2 @@
-export const siteUrl = new URL(process.env.APP_URL || "http://localhost:3000");
+// Keep the public identity stable even if a deployment still has the old URL.
+export const siteUrl = new URL("https://www.doixenq.com");
