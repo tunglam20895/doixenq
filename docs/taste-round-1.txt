@@ -1,0 +1,236 @@
+gate: checking http://localhost:3000/ (service); this takes a few minutes on a CPU Chrome
+gate: 77 FAIL open
+  FAIL nav              header.site-header > div.wrap.header-inner > a.brand "NHƯ QUỲNH ĐỘI XE · HƯNG YÊN"  [1440, 390]
+       nav link wraps to a second line
+       fix: make the nav one bar from the content's left edge to its right edge, with every link and action inside it
+  FAIL spill            section.hero > div.wrap.hero-grid > div.hero-showcase > div.showcase-orbit.orbit-two  [1440, 390]
+       runs 35px past the bottom edge of the panel it sits on (section.hero > div.wrap.hero-grid > div.hero-showcase > div.showcase-orbit.orbit-one)
+       fix: keep the box inside the panel it starts on: shrink it, or grow the panel to hold it
+  FAIL spill            div.wrap.hero-grid > div.hero-showcase > div.showcase-bottom > button.scene-trigger "Khám   [1440]
+       runs 32px past the bottom edge of the panel it sits on (section.hero > div.wrap.hero-grid > div.hero-showcase > div.showcase-orbit.orbit-two)
+       fix: keep the box inside the panel it starts on: shrink it, or grow the panel to hold it
+  FAIL no-visual        section#hanh-trinh "Bạn hẹn điểm đến. Mình lo chuyến đi."  [1440]
+       pictures, effects and mocks cover 12% of this section; a feature section needs a visual (about 25% or more)
+       fix: give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits
+  FAIL no-visual        section#tai-xe "Biết người đón mình, trước khi lên xe."  [1440, 390]
+       no picture, effect or mock in this section; a feature section needs a visual
+       fix: give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits
+  FAIL text-only        main#main > section.section.faq-section "Bạn hỏi, mình trả lời."  [1440, 390]
+       the closing section is only text: no picture, icon, mock or effect in it
+       fix: give the section a visual: a photograph that fits, the real icons, or a UI fragment on a ground
+  FAIL card-visual      section#tai-xe > div.wrap > div.drivers-grid "M Hồ sơ mẫu Anh Minh Nhận chuyến sân bay"  [1440, 390]
+       3 cards hold only text: no picture, icon, UI fragment or effect in any of them
+       fix: give the cards a visual: an inset panel with a UI fragment, a photograph or real icons
+  FAIL card-layout      section#doi-xe > div.wrap > div.fleet-grid "7 CHỖ Xe điện Rộng rãi cho cả nhà VinFas"  [1440, 390]
+       6 of 6 cards drawn one way (one panel, ground, placement and fragment): copies of one card
+       fix: a card layout at most twice on a page: build the other sections another way
+  FAIL button-styles    (the page)  [1440, 390]
+       3 button styles on the page: soft, fill #173e35, outline #173e35 x3 ("Đặt xe"); soft, fill #f8faf1, outline #cad5c0 x1 ("Khám phá 3D"); soft, fill #d8eea2 x1 ("Đặt chuyến xe")
+       fix: one primary and one secondary button: one shape, one height per size, one label size
+  FAIL cta              main#main > section.section.faq-section "Bạn hỏi, mình trả lời."  [1440, 390]
+       the last section before the footer ends with no button
+       fix: add the action: a button in the hero, one on every priced item, one in the closing section
+  FAIL copy-headline    h1#hero-title "Từ Như Quỳnh, đi cùng bạn."  [1440]
+       "Từ Như Quỳnh, đi cùng bạn." does not name what is sold (at xe taxi theo lich, taxi, theo, lich, from flags)
+       fix: put the category noun in the h1 (and who it is for, or where), in 2 to 8 words
+  FAIL copy-headings    div.mo-pc__text > ol.mo-pc__steps > li.mo-pc__step:nth-of-type(3) > h3 "Đội xe xác nhận cù  [1440]
+       "Đội xe xác nhận cùng bạn" names no product, part, place or section (5 headings like it; at most one brand line per page) (and 4 more like it: "Bạn hỏi, mình trả lời.", "Giá trên website đã là g", "Tôi cần cài ứng dụng h
+       fix: name the thing in every heading: the product, a part, the place or a section noun
+  FAIL copy-actions     div#dat-chuyen > div.quick-book > a.btn.btn-primary "Tìm chuyến xe"  [1440, 390]
+       3 actions in the hero ("Xem giá & đặt xe", "Khám phá 3D", "Tìm chuyến xe"); at most 2
+       fix: few actions, one wording: at most 2 in the hero, the main action word for word in nav, hero and close
+  FAIL off-grid         div.wrap.hero-grid > div.hero-copy > div.hero-coordinate > span "Xuất phát từ Như Quỳnh, H  [1440]
+       left edge at 121px, 21px off the page margin at 100px (26 elements, like span:nth-of-type(1))
+       fix: move it onto the page margin, or the column edge its section uses
+  FAIL tilt             section.hero > div.wrap.hero-grid > div.hero-showcase > div.showcase-orbit.orbit-one  [1440, 390]
+       turned in 3D (and 2 more like it: div.showcase-orbit.orbit-two, div.showcase-platform)
+       fix: set it straight
+  FAIL tilt             div.route-grid > a.route-card.route-airport > div.route-art > svg.lucide.lucide-plane  [1440, 390]
+       rotated -25.0°
+       fix: set it straight
+  FAIL text-contrast    section.hero > div.wrap.hero-grid > div.hero-copy > p.hero-lead "Một chuyến ra sân bay, về  [1440]
+       body text in #67746b on #fafbf7 reads 4.71:1 (needs 7:1)
+       fix: body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels
+  FAIL text-contrast    section#hanh-trinh > div.wrap > p.section-note "Điểm đến khác? Chọn địa chỉ hoặc ghim tr"  [1440, 390]
+       a caption, label or muted line in #67746b on #eff2e9 reads 4.33:1 (needs 4.5:1)
+       fix: body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels
+  FAIL text-contrast    div.mo-pc__text > ol.mo-pc__steps > li.mo-pc__step:nth-of-type(1) > span.step-counter "01"  [1440, 390]
+       a caption, label or muted line in #73896c on #e7eedf reads 3.2:1 (needs 4.5:1); 3 like it, like "02", "03"
+       fix: body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels
+  FAIL text-contrast    div.mo-pc__text > ol.mo-pc__steps > li.mo-pc__step:nth-of-type(2) > h3 "Bạn chọn xe và ngư  [1440]
+       a caption, label or muted line in #67746b on #e7eedf reads 4.13:1 (needs 4.5:1); 2 like it, like "Đội xe xác nhận cùng b"
+       fix: body text in the ink at 7:1 or more; grey (4.5:1 or more) only for captions and labels
+  FAIL focus-ring       .input-with-icon input:focus  [1440]
+       ".input-with-icon input:focus" in app_globals_0yg4wg8plh8sv.css removes the focus outline and sets nothing in its place
+       fix: keep the kit's :focus-visible ring, or put a change of the same strength (a 2px line in --action) in the rule that removes it
+  FAIL focus-ring       .booking-heading h1:focus  [1440]
+       ".booking-heading h1:focus" in app_globals_0yg4wg8plh8sv.css removes the focus outline and sets nothing in its place
+       fix: keep the kit's :focus-visible ring, or put a change of the same strength (a 2px line in --action) in the rule that removes it
+  FAIL focus-visible    div.quick-book > div.place-input.compact:nth-of-type(2) > div.input-with-icon:nth-of-type(  [1440]
+       Tab stop 12, input "": it shows no change when focused
+       fix: keep the kit's ring (system.css :focus-visible, 2px in --action, there at once); a control that hides itself shows on focus
+  FAIL focus-visible    div.quick-book > div.place-input.compact:nth-of-type(3) > div.input-with-icon:nth-of-type(  [1440]
+       Tab stop 16, input "": it shows no change when focused
+       fix: keep the kit's ring (system.css :focus-visible, 2px in --action, there at once); a control that hides itself shows on focus
+  FAIL section-height   footer.site-footer "ĐỘI XE NHƯ QUỲNH HƯNG YÊNChuyến tới,mình"  [1440]
+       the section is 424px tall (0.5 screens), 476px short of one screen (900px): every section after the hero is one screen or two, 2px either way (SR-2)
+       fix: set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit
+  FAIL section-height (screen-height) section#doi-xe "ĐỘI XE CỦA BẠNĐúng xe, đúng chuyến đi.Đi"  [1440, 390]
+       the section is 1313px tall (1.5 screens), 413px over one screen (900px): every section after the hero is one screen or two, 2px either way (SR-2)
+       fix: set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit
+  FAIL section-height   main#main > section.section.faq-section "TRƯỚC KHI ĐẶT XEBạn hỏi,mình trả lời.Xem"  [1440]
+       the section is 606px tall (0.7 screens), 294px short of one screen (900px): every section after the hero is one screen or two, 2px either way (and 2 more like it: "NGƯỜI CẦM LÁIBiết người ", "NHỮNG CUNG ĐƯỜNG QUENBạn") (
+       fix: set the section to one screen or two (height: calc(var(--h,1) * 100vh), --h 1 or 2) and cut or split its content to fit
+  FAIL section-height (screen-short, screen-height) section#hanh-trinh "NHỮNG CUNG ĐƯỜNG QUENBạn hẹn điểm đến.Mì"  [1440]
+       the section starts at 2213px, 413px below the screen grid (2 x 900px): sections start on whole screens (SR-2)
+       fix: make every section above it exactly one or two screens tall, so this one starts on a whole screen
+  FAIL section-height (screen-short, screen-height) section#tai-xe "NGƯỜI CẦM LÁIBiết người đón mình,trước k"  [1440]
+       the section starts at 2985px, 285px below the screen grid (3 x 900px): sections start on whole screens (SR-2)
+       fix: make every section above it exactly one or two screens tall, so this one starts on a whole screen
+  FAIL one-section      section#doi-xe "ĐỘI XE CỦA BẠNĐúng xe, đúng chuyến đi.Đi"  [1440]
+       the screen at scroll 1800px (stride 2) shows 413px of section 2 and the content of 2 sections, over 24px each beside section 3: a screen shows one section (another may peek 8px, 24px WARN) (SR-4)
+       fix: make each section exactly one screen or two, so a screen shows one section and no neighbour peeks
+  FAIL one-section      div.wrap > div.footer-top > div:nth-of-type(1) > h2 "Chuyến tới,mình đi cùng nhau."  [1440]
+       the screen at scroll 5512px (the top of section 6) shows 293px of section 7 and the heading of section 7 whole and the content of 2 sections, over 24px each beside section 6: a screen shows one section (another may peek 
+       fix: make each section exactly one screen or two, so a screen shows one section and no neighbour peeks
+  FAIL one-section (neighbour) section#hanh-trinh "NHỮNG CUNG ĐƯỜNG QUENBạn hẹn điểm đến.Mì"  [1440, 390]
+       the screen at scroll 2700px (stride 3) shows 285px of section 3 and the content of 2 sections, over 24px each beside section 4: a screen shows one section (another may peek 8px, 24px WARN) (and 5 more like it: scroll 540
+       fix: make each section exactly one screen or two, so a screen shows one section and no neighbour peeks
+  FAIL one-heading      div.wrap > div.footer-top > div:nth-of-type(1) > h2 "Chuyến tới,mình đi cùng nhau."  [1440]
+       headings of two sections show whole on one screen at 4 of 113 scroll positions (3.5%; at scroll 5450, 5500, 5550, 5600px), here with "Bạn hỏi,mình trả lời.": at most 3% on a desktop (SR-5)
+       fix: make the sections one screen tall so their headings sit a screen apart and two never share one
+  FAIL container-edges  a.skip-link "Đến nội dung chính"  [1440]
+       a <a> at the top of the page, outside header.nav, main, footer.closing and nav.actionbar (SR-6)
+       fix: build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing
+  FAIL container-edges  header.site-header "NHƯ QUỲNHĐỘI XE · HƯNG YÊNĐội xeTuyến đư"  [1440]
+       a <header> at the top of the page, outside header.nav, main, footer.closing and nav.actionbar (SR-6)
+       fix: build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing
+  FAIL container-edges  footer.site-footer "ĐỘI XE NHƯ QUỲNH HƯNG YÊNChuyến tới,mình"  [1440]
+       a <footer> at the top of the page, outside header.nav, main, footer.closing and nav.actionbar (and 2 more like it: "XE 5–7 CHỖ · HƯNG YÊNTừ ", "XE 5–7 CHỖ · HƯNG YÊNTừ ") (SR-6)
+       fix: build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing
+  FAIL container-edges  div.footer-top > div.footer-columns > div:nth-of-type(1) > h3 "Hành trình của bạn"  [1440]
+       1 text block starts on a left line at x 755, 655px from the container's left: text starts on the container's left, or on one split line (x 627, 732, 837) (SR-6)
+       fix: start the text on the container's left, or on the one split line every split shares
+  FAIL container-edges  div.wrap.faq-grid > div.faq-list > div.faq-item:nth-of-type(1) > h3 "Giá trên website đã l  [1440]
+       8 text blocks start on a left line at x 656, 556px from the container's left: text starts on the container's left, or on one split line (x 627, 732, 837) (also "Đây là giá dự kiến theo hành trì", "Tôi có được chọn đúng x
+       fix: start the text on the container's left, or on the one split line every split shares
+  FAIL container-edges  div#dat-chuyen > p.demo-disclosure "Bản trải nghiệm với bảng giá và hồ sơ tà"  [1440]
+       1 text block starts on a left line at x 522, 422px from the container's left: text starts on the container's left, or on one split line (x 627, 732, 837) (and 2 more like it: x 179, x 121) (SR-6)
+       fix: start the text on the container's left, or on the one split line every split shares
+  FAIL row-lines        div#dat-chuyen > div.quick-book "Chuyến tới, bạn đi đâu?Xem hành trình và"  [1440]
+       a row of 2 items: its first item starts at 485px, the container's left line at 100px; its last item ends at 1141px, the container's right line at 1340px (2px either way) (SR-7)
+       fix: start the row's first item on the container's left line and end its last on the right line, every item one height
+  FAIL split-pair       footer.site-footer > div.wrap > div.footer-top "ĐỘI XE NHƯ QUỲNH HƯNG YÊNChuyến tới,mình"  [1440]
+       the two columns of the split start 11px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)
+       fix: top-align both columns of the split (align-items: start)
+  FAIL split-pair       main#main > section.hero > div.wrap.hero-grid "XE 5–7 CHỖ · HƯNG YÊNTừ Như Quỳnh,đi cùn"  [1440]
+       the two columns of the split start 9px apart at the top (centred on each other): a split's columns are top-aligned, 8px either way (SR-8)
+       fix: top-align both columns of the split (align-items: start)
+  FAIL split-pair       main#main > section.section.faq-section > div.wrap.faq-grid "TRƯỚC KHI ĐẶT XEBạn hỏi,mình   [1440]
+       the split's columns are off the page's one pair of lines: its right column starts at x 656, the first split's at 718; its right column starts at x 656, on none of the split lines 627 (k=5), 732 (k=6), 837 (k=7) (SR-8)
+       fix: start every split's right column on one shared line (wrap.left + k x (width + 24) / 12, k 5, 6 or 7; 6 on a place page) and end the left one 24px before it
+  FAIL spill            section.hero > div.wrap.hero-grid > div.hero-showcase > img.hero-car "img: VinFast Limo Gr  [390]
+       runs 86px past the top edge of the panel it sits on (section.hero > div.wrap.hero-grid > div.hero-showcase > div.showcase-orbit.orbit-two)
+       fix: keep the box inside the panel it starts on: shrink it, or grow the panel to hold it
+  FAIL button-styles    (one screen)  [390]
+       3 button styles on one screen: soft, fill #173e35, outline #173e35 ("Đặt xe"); soft, fill #f8faf1, outline #cad5c0 ("Khám phá 3D"); soft, fill #173e35 ("Đặt chuyến xe"); the odd one out: "Đặt chuyến xe"
+       fix: one primary and one secondary button: one shape, one height per size, one label size
+  FAIL heading-scale    div.wrap > div.drivers-grid > article.driver-card:nth-of-type(1) > h3 "Anh Minh"  [390]
+       h3 headings in 3 sizes, 14px ("Giá trên website đã là g") to 25px (x1.79)
+       fix: size headings by level: the h1 largest, one size per level, each level below the one above
+  FAIL hole             main#main > section.section.process-section "Một lịch hẹn. Một chuyến xe."  [390]
+       an empty hole 248x336px inside the section (40% of the screen's height), with content above and below it
+       fix: close the empty space: move the content together, or give the space the visual it lacks
+  FAIL hero-fill        section#doi-xe "Đúng xe, đúng chuyến đi."  [768]
+       the next section shows on the first screen: it starts at 802px on a 1024px screen (the hero ends at 731px)
+       fix: let the hero fill the first screen alone (min-height: 100svh, less above it): nothing of the next section on load
+  FAIL edge-left        section.hero.is-still div.hero-showcase "CHUYẾN ĐI XANH100% ĐIỆNGREENKHÔN"  [1440]
+       starts at x 718; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        #doi-xe p "Đi một mình hay đi cùng cả nhà,l"  [1440]
+       starts at x 1153.9; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-right       #doi-xe article.vehicle-card.card "7 CHỖXe điệnRộng rãi cho cả nhàV"  [1440]
+       ends at x 497.3; the right line is 1340
+       fix: end it on the .wrap right line
+  FAIL edge-left        #doi-xe article.vehicle-card.card "5 CHỖXe điệnGọn gàng trong phốVi"  [1440]
+       starts at x 942.7; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-right       #doi-xe article.vehicle-card.card "5 CHỖLựa chọn quen thuộcToyota V"  [1440]
+       ends at x 497.3; the right line is 1340
+       fix: end it on the .wrap right line
+  FAIL edge-left        #doi-xe article.vehicle-card.card "5 CHỖXe điệnChuyến đi xanhVinFas"  [1440]
+       starts at x 942.7; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        #hanh-trinh a.route-card.route-coast "03TỪ NHƯ QUỲNHHải PhòngHành trìn"  [1440]
+       starts at x 942.7; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        #tai-xe p "Bạn có thể chọn tài xế mong muốn"  [1440]
+       starts at x 1120.1; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        #tai-xe h3 "Anh Minh"  [1440]
+       starts at x 129; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        #tai-xe p "Nhận chuyến sân bay và liên tỉnh"  [1440]
+       starts at x 129; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        #tai-xe h3 "Anh Tuấn"  [1440]
+       starts at x 971.7; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        #tai-xe p "Nhận chuyến nội thành và đặt lịc"  [1440]
+       starts at x 971.7; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        section.section.faq-section div.faq-list "Giá trên website đã là giá cuối "  [1440]
+       starts at x 656; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        section.section.faq-section h3 "Giá trên website đã là giá cuối "  [1440]
+       starts at x 656; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        section.section.faq-section p "Đây là giá dự kiến theo hành trì"  [1440]
+       starts at x 656; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        section.section.faq-section h3 "Tôi có được chọn đúng xe và tài "  [1440]
+       starts at x 656; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        section.section.faq-section p "Bạn có thể gửi lựa chọn mong muố"  [1440]
+       starts at x 656; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        section.section.faq-section h3 "Tôi cần cài ứng dụng hay tạo tài"  [1440]
+       starts at x 656; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        section.section.faq-section p "Bạn đặt trực tiếp trên website b"  [1440]
+       starts at x 656; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        section.section.faq-section h3 "Tôi có thể đặt xe khứ hồi không?"  [1440]
+       starts at x 656; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL edge-left        section.section.faq-section p "Có. Chọn “Khứ hồi” và giờ đón về"  [1440]
+       starts at x 656; the lines are 100 and the column starts
+       fix: start it on the .wrap left line
+  FAIL screen-short     section.hero.is-still section.hero.is-still "XE 5–7 CHỖ · HƯNG YÊNTừ Như Quỳn"  [1440]
+       812px tall; one screen under the nav is 900px
+       fix: make the section one full screen (--h: 1, layout-v4.md section 2)
+  FAIL neighbour-ground #tai-xe section.section.drivers-section "NGƯỜI CẦM LÁIBiết người đón mình"  [1440]
+       framed, 173px of section.section.process-section section.section.process-section "ĐẶT XE THEO CÁCH CỦA BẠNMột lịch"'s ground shows
+       fix: end the ground with the section
+  FAIL screen-short     section.section.faq-section section.section.faq-section "TRƯỚC KHI ĐẶT XEBạn hỏi,mình trả"  [1440, 390]
+       606px tall; one screen under the nav is 900px
+       fix: make the section one full screen (--h: 1, layout-v4.md section 2)
+  FAIL screen-height    section.section.faq-section section.section.faq-section "TRƯỚC KHI ĐẶT XEBạn hỏi,mình trả"  [1440, 390]
+       606px, 0.67 screens; a section is exactly one or two (--h)
+       fix: make the section exactly one or two screens (--h: 1 or 2)
+  FAIL neighbour        section.section.faq-section section.section.faq-section "TRƯỚC KHI ĐẶT XEBạn hỏi,mình trả"  [1440]
+       framed, 294px of the footer shows
+       fix: keep the next section's heading and picture out of this screen
+  FAIL hero-fold        section.hero.is-still section.hero.is-still "XE 5–7 CHỖ · HƯNG YÊNTừ Như Quỳn"  [1440, 390]
+       starts at y 88, not under the nav
+       fix: the hero fills the first screen alone, its button inside it
+  FAIL neighbour        #tai-xe section.section.drivers-section "NGƯỜI CẦM LÁIBiết người đón mình"  [390]
+       framed, 204px of section.section.process-section section.section.process-section "ĐẶT XE THEO CÁCH CỦA BẠNMột lịch" shows
+       fix: keep the next section's heading and picture out of this screen
+  FAIL screen-height    section.section.process-section section.section.process-section "ĐẶT XE THEO CÁCH CỦA BẠNM  [390]
+       1838px, 2.18 screens; a section is exactly one or two (--h), or on a phone at least one that its content fills
+       fix: make the section exactly one or two screens (--h: 1 or 2)
+  41 WARN (not blocking), first: cut-text section.hero > div.wrap.hero-grid > div.; scroll-reveal main#main > section.section.process-sect; pinned main#main > section.section.process-sect; no-visual main#main > section.hero "Từ Như Quỳnh, ; cta main#main > section.section.process-sect
+A FAIL you judge false: add {"check": "<id>", "target": "<its where, enough to name that one finding>", "reason": "<why, 12+ characters>"} to .taste-skill/waivers.json (one finding each, 5 at most, never for kit-edited or checker-gaming); it goes in your report. Never edit the kit's files or hide the page from the checker.
+GATE: FAIL 77 (round 1 of 3)

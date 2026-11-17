@@ -1,0 +1,9 @@
+.env*
+!.env.example
+.data/
+.taste-skill/
+shots/
+node_modules/
+.next/
+test-results/
+playwright-report/

@@ -1,0 +1,15 @@
+node_modules/
+.next/
+.env*
+!.env.example
+.vercel/
+.data/
+*.tsbuildinfo
+.taste-skill/chrome*/
+shots/
+test-results/
+playwright-report/
+
+.taste-skill/
+
+supabase/.temp/
