@@ -2,9 +2,9 @@ import Link from "next/link";
 import { ArrowUpRight, Info } from "lucide-react";
 import { VEHICLES, money } from "@/lib/data";
 export const metadata = {
-  title: "Giá taxi Như Quỳnh, Văn Lâm, Phố Nối & xe 5–7 chỗ",
+  title: "Giá taxi Hưng Yên & cước xe 5–7 chỗ",
   description:
-    "Tham khảo bảng cước mẫu xe 5–7 chỗ tại Như Quỳnh, cách tính giá theo km và chi phí phát sinh. Liên hệ đội xe để xác nhận giá thực tế.",
+    "Tham khảo bảng cước mẫu xe 5–7 chỗ tại Hưng Yên, Yên Mỹ, Mỹ Hào và các khu vực phục vụ, cách tính giá theo km và chi phí phát sinh. Liên hệ đội xe để xác nhận giá thực tế.",
   alternates: { canonical: "/bang-gia" },
 };
 export default function Page() {

@@ -97,10 +97,11 @@ export function Footer() {
             </div>
             <div>
               <h3>Thông tin cần biết</h3>
+              <Link href="/dich-vu">Khu vực phục vụ & dịch vụ xe</Link>
               <Link href="/chinh-sach">Đặt xe & hủy chuyến</Link>
               <Link href="/chinh-sach#bao-mat">Bảo mật thông tin</Link>
               <span className="footer-location">
-                <MapPin size={17} /> Như Quỳnh · Văn Lâm · Phố Nối
+                <MapPin size={17} /> Hưng Yên · Yên Mỹ · Mỹ Hào
               </span>
               <a href={CONTACT.telephone}>Hotline: {CONTACT.phone}</a>
               <a href={CONTACT.zalo} target="_blank" rel="noopener noreferrer">

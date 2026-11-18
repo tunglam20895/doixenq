@@ -1,4 +1,5 @@
 "use client";
+import { serviceAreaText } from "@/lib/service-areas";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -70,8 +71,8 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
               đi cùng <span>bạn.</span>
             </h1>
             <p className="hero-lead">
-              Đón khách tại Như Quỳnh, Văn Lâm, Phố Nối và khu vực lân cận. Xe
-              5–7 chỗ đi Nội Bài, Hà Nội và liên tỉnh.
+              Đón khách tại {serviceAreaText} và khu vực lân cận. Xe 5–7 chỗ đi
+              Nội Bài, Hà Nội và liên tỉnh.
               <br className="desktop-only" /> Chọn chiếc xe bạn thích. Hẹn giờ,
               mình đón.
             </p>
@@ -95,7 +96,7 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
             </div>
             <div className="hero-coordinate">
               <MapPin size={14} />
-              <span>Phục vụ Như Quỳnh · Văn Lâm · Phố Nối</span>
+              <span>Nhận đón tại nhiều khu vực ở Hưng Yên</span>
             </div>
           </div>
           <div className="hero-showcase" data-enter-media>
@@ -342,7 +343,7 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
           <p className="section-note">
             Điểm đến khác? Chọn địa chỉ hoặc ghim trên bản đồ ở trang đặt xe.{" "}
             <Link href="/dich-vu">
-              Xem dịch vụ taxi Như Quỳnh, Văn Lâm, Phố Nối và xe sân bay
+              Xem khu vực phục vụ và dịch vụ taxi Hưng Yên
             </Link>
             .
           </p>

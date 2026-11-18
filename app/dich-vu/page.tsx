@@ -1,10 +1,10 @@
+import { serviceAreaText } from "@/lib/service-areas";
 import Link from "next/link";
 import { CONTACT } from "@/lib/contact";
 
 export const metadata = {
-  title: "Taxi Như Quỳnh, Văn Lâm, Phố Nối & xe sân bay",
-  description:
-    "Đội xe Như Quỳnh nhận đón tại Như Quỳnh, Văn Lâm, Phố Nối và khu vực lân cận, đi Nội Bài, Hà Nội và liên tỉnh. Chọn một chiều hoặc khứ hồi, liên hệ 0977823111.",
+  title: "Taxi Hưng Yên, Yên Mỹ, Mỹ Hào & các khu vực phục vụ",
+  description: `Đặt taxi tại ${serviceAreaText}. Đội xe Như Quỳnh có xe 5–7 chỗ đi Nội Bài, Hà Nội và liên tỉnh. Liên hệ 0977823111.`,
   alternates: { canonical: "/dich-vu" },
 };
 
@@ -15,13 +15,22 @@ export default function Page() {
         <span className="eyebrow">CHỌN CHUYẾN ĐI CỦA BẠN</span>
         <h1>Đội xe Như Quỳnh — đón bạn ở nhiều khu vực.</h1>
         <p className="page-lead">
-          Như Quỳnh là tên đội xe. Chúng tôi nhận đón tại Như Quỳnh, Văn Lâm,
-          Phố Nối và khu vực lân cận, đi Nội Bài, Hà Nội và các tỉnh. Bạn chọn
-          hành trình, thời gian và dòng xe mong muốn; đội xe kiểm tra lịch và
-          liên hệ xác nhận trước chuyến đi.
+          Như Quỳnh là tên đội xe. Chúng tôi nhận đón tại {serviceAreaText} và
+          khu vực lân cận, đi Nội Bài, Hà Nội và các tỉnh. Bạn chọn hành trình,
+          thời gian và dòng xe mong muốn; đội xe kiểm tra lịch và liên hệ xác
+          nhận trước chuyến đi.
         </p>
         <nav aria-label="Dịch vụ xe">
           <ul>
+            <li>
+              <a href="#taxi-hung-yen">Taxi Hưng Yên</a>
+            </li>
+            <li>
+              <a href="#taxi-yen-my">Taxi Yên Mỹ</a>
+            </li>
+            <li>
+              <a href="#taxi-my-hao">Taxi Mỹ Hào</a>
+            </li>
             <li>
               <a href="#taxi-nhu-quynh">Taxi Như Quỳnh, Văn Lâm</a>
             </li>
@@ -39,6 +48,48 @@ export default function Page() {
             </li>
           </ul>
         </nav>
+        <article id="taxi-hung-yen">
+          <h2>Đặt taxi Hưng Yên</h2>
+          <p>
+            Đội xe Như Quỳnh nhận yêu cầu đón khách tại nhiều khu vực ở Hưng
+            Yên, đi Hà Nội, sân bay Nội Bài và liên tỉnh. Bạn có thể chọn xe 5–7
+            chỗ, hành trình một chiều hoặc khứ hồi theo số người và lịch đi.
+          </p>
+          <p>
+            Nhập địa chỉ đón cụ thể và thời gian mong muốn để đội xe kiểm tra
+            khả năng sắp xếp. Nếu có nhiều điểm đón, ghi chú từng địa chỉ và
+            liên hệ để thống nhất hành trình, xe và giá trước chuyến.
+          </p>
+          <Link href="/dat-xe">Đặt xe tại Hưng Yên</Link>
+        </article>
+        <article id="taxi-yen-my">
+          <h2>Đặt taxi Yên Mỹ</h2>
+          <p>
+            Cần xe đón tại Yên Mỹ để đi làm việc, ra sân bay hoặc đi tỉnh? Chọn
+            điểm đón trên bản đồ, nhập điểm đến và giờ đi. Với chuyến có giờ hẹn
+            cố định, hãy trao đổi trước để đội xe xác nhận lịch đón.
+          </p>
+          <p>
+            Nếu đi về trong cùng lịch trình, chọn Khứ hồi và giờ đón về. Thời
+            gian chờ, điểm dừng thêm và chi phí phát sinh cần được thống nhất
+            riêng; giá trên website là giá dự kiến.
+          </p>
+          <Link href="/dat-xe">Chọn điểm đón tại Yên Mỹ</Link>
+        </article>
+        <article id="taxi-my-hao">
+          <h2>Đặt taxi Mỹ Hào</h2>
+          <p>
+            Khi cần taxi tại Mỹ Hào, bạn có thể gửi yêu cầu xe 5–7 chỗ đến Đội
+            xe Như Quỳnh. Cung cấp số hành khách, hành lý và địa chỉ đón để đội
+            xe kiểm tra dòng xe phù hợp cho hành trình của bạn.
+          </p>
+          <p>
+            Với điểm đón ở nhà máy, khu công nghiệp hoặc khu dân cư, ghi rõ tên
+            cổng và vị trí hẹn. Bạn có thể gọi hoặc nhắn Zalo nếu cần trao đổi
+            điểm đón; đội xe sẽ xác nhận trước khi thực hiện chuyến.
+          </p>
+          <Link href="/dat-xe">Chọn điểm đón tại Mỹ Hào</Link>
+        </article>
         <article id="taxi-nhu-quynh">
           <h2>Đặt taxi tại Như Quỳnh, Văn Lâm</h2>
           <p>
@@ -69,7 +120,7 @@ export default function Page() {
           <Link href="/dat-xe">Chọn điểm đón tại Phố Nối</Link>
         </article>
         <article id="xe-noi-bai">
-          <h2>Xe đi sân bay Nội Bài từ Như Quỳnh, Văn Lâm, Phố Nối</h2>
+          <h2>Xe đi sân bay Nội Bài từ các khu vực ở Hưng Yên</h2>
           <p>
             Với chuyến ra sân bay, chọn Nội Bài làm điểm đến, nhập ngày và giờ
             đón mong muốn. Ghi chú nhà ga T1 hoặc T2, giờ bay và lượng hành lý

@@ -1,4 +1,5 @@
 import { siteUrl } from "@/lib/site";
+import { serviceAreas } from "@/lib/service-areas";
 import Home from "@/components/Home";
 import { publicDrivers } from "@/lib/drivers";
 export const metadata = { alternates: { canonical: "/" } };
@@ -29,14 +30,7 @@ export default async function Page() {
               "Xe liên tỉnh 5–7 chỗ",
             ],
             image: new URL("/brand/nhu-quynh-logo.png", siteUrl).href,
-            areaServed: [
-              "Như Quỳnh",
-              "Văn Lâm",
-              "Phố Nối",
-              "Hưng Yên",
-              "Hà Nội",
-              "Sân bay Nội Bài",
-            ],
+            areaServed: [...serviceAreas, "Hà Nội", "Sân bay Nội Bài"],
             provider: {
               "@type": "Organization",
               name: "Đội xe Như Quỳnh",

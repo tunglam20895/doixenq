@@ -53,3 +53,7 @@ Google tự quyết định thời điểm lập chỉ mục, thứ hạng và g
 ## Biểu tượng và thương hiệu
 
 Tên thương hiệu: Đội xe Như Quỳnh. Khu vực phục vụ được trình bày riêng: Như Quỳnh, Văn Lâm, Phố Nối và lân cận. Favicon lấy phần biểu tượng NQ từ logo hiện có, xuất ICO nhiều kích thước, PNG 96/512 và Apple icon 180. Google cần thu thập lại và tự quyết định việc hiển thị favicon. Không thêm khu vực chưa được chủ đội xe xác nhận.
+
+## Mở rộng khu vực phục vụ
+
+Danh sách thống nhất tại `lib/service-areas.ts`: Như Quỳnh, Văn Lâm, Phố Nối, Yên Mỹ, Mỹ Hào, Hưng Yên. Trang /dich-vu bổ sung nội dung và liên kết neo #taxi-hung-yen, #taxi-yen-my, #taxi-my-hao. Thông tin được đồng bộ vào giới thiệu, mô tả SEO và areaServed. Không bảo đảm thứ hạng cho từng truy vấn; dùng dữ liệu Search Console để đánh giá sau khi Google thu thập lại.
