@@ -1,5 +1,6 @@
 "use client";
 import { ESTIMATED_FARE_NOTE, FARE_EXCLUSIONS } from "@/lib/fare-copy";
+import { CONTACT } from "@/lib/contact";
 import { serviceAreaText } from "@/lib/service-areas";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -75,7 +76,8 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
               Đón khách tại {serviceAreaText} và khu vực lân cận. Xe 5–7 chỗ đi
               Nội Bài, Hà Nội và liên tỉnh.
               <br className="desktop-only" /> Chọn chiếc xe bạn thích. Hẹn giờ,
-              mình đón.
+              mình đón. Gọi đặt xe:{" "}
+              <a href={CONTACT.telephone}>{CONTACT.phone}</a>.
             </p>
             <div className="hero-links">
               <a className="btn btn-primary" href="#dat-chuyen">
@@ -342,7 +344,10 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
             ))}
           </div>
           <p className="section-note">
-            Điểm đến khác? Chọn địa chỉ hoặc ghim trên bản đồ ở trang đặt xe.{" "}
+            <Link href="/xe-san-bay-noi-bai">
+              Taxi Hưng Yên đi Nội Bài: chọn xe, giờ đón và xem giá dự kiến
+            </Link>
+            . Điểm đến khác? Chọn địa chỉ hoặc ghim trên bản đồ ở trang đặt xe.{" "}
             <Link href="/dich-vu">
               Xem khu vực phục vụ và dịch vụ taxi Hưng Yên
             </Link>

@@ -57,3 +57,24 @@ Tên thương hiệu: Đội xe Như Quỳnh. Khu vực phục vụ được tr�
 ## Mở rộng khu vực phục vụ
 
 Danh sách thống nhất tại `lib/service-areas.ts`: Như Quỳnh, Văn Lâm, Phố Nối, Yên Mỹ, Mỹ Hào, Hưng Yên. Trang /dich-vu bổ sung nội dung và liên kết neo #taxi-hung-yen, #taxi-yen-my, #taxi-my-hao. Thông tin được đồng bộ vào giới thiệu, mô tả SEO và areaServed. Không bảo đảm thứ hạng cho từng truy vấn; dùng dữ liệu Search Console để đánh giá sau khi Google thu thập lại.
+
+## Kiểm tra gợi ý và Search Console ngày 18/11/2026
+
+Nguồn quan sát: ô gợi ý Google trong trình duyệt đăng nhập, giao diện tiếng Việt. Gợi ý có yếu tố cá nhân hóa; mục có nút xóa khỏi nhật ký là lịch sử tìm kiếm, không coi là bằng chứng nhu cầu mới. Không có số liệu lượng tìm kiếm hoặc thứ hạng từ danh sách autocomplete.
+
+- `taxi Hưng Yên`: có gợi ý `taxi hưng yên hà nội`, `taxi hưng yên phố nối`, `taxi hưng yên giá rẻ`; đồng thời có 24h, khu vực khác và tên hãng khác.
+- `taxi Như Quỳnh`: có `taxi như quỳnh văn lâm hưng yên`, `taxi như quỳnh hưng yên`, `số taxi như quỳnh`, `tổng đài taxi như quỳnh` và các tên đơn vị khác.
+- `taxi Yên Mỹ`: có `taxi yên mỹ hưng yên`, `taxi yên mỹ phố nối`, `tổng đài taxi yên mỹ` và các tên đơn vị khác.
+- `taxi Mỹ Hào`: có `taxi mỹ hào hưng yên`, `số taxi mỹ hào hưng yên`, `taxi phố nối mỹ hào`, `tổng đài taxi mỹ hào` và các tên đơn vị khác.
+- `taxi Hưng Yên đi`: có `taxi từ hưng yên đi nội bài`, `taxi hưng yên đi hà nội`, `số điện thoại taxi hưng yên`, `taxi điện hưng yên`, `taxi điện vinfast hưng yên`.
+
+Search Console, thuộc tính Domain `doixenq.com`, báo cáo hiệu suất Web / 3 tháng: “Đang xử lý dữ liệu, hãy kiểm tra lại sau khoảng một ngày”; bảng truy vấn “Không có dữ liệu”. Chưa thể kết luận từ khóa có nhiều lượt tìm, CTR thấp hoặc mang lại nhiều đơn nhất. Ảnh bằng chứng lưu cục bộ trong reports (không push).
+
+Thay đổi theo bằng chứng: tạo /xe-san-bay-noi-bai với canonical riêng, thêm sitemap và liên kết từ trang chủ/dịch vụ/footer; làm rõ số gọi đặt xe, taxi điện, tuyến Hưng Yên–Hà Nội và Yên Mỹ–Phố Nối–Mỹ Hào. Rút gọn title theo mục đích trang. Không thêm tên hãng khác, cam kết 24/7, giá rẻ nhất hoặc khu vực chưa xác nhận. Không triển khai cách can thiệp autocomplete.
+
+Khi Search Console có dữ liệu: so sánh truy vấn theo lượt hiển thị, lượt nhấp, CTR, vị trí và trang đích; ưu tiên truy vấn có ý định đặt xe và phù hợp dịch vụ. Search Console không đo trực tiếp số đơn đặt xe theo từng truy vấn.
+
+Nguồn hướng dẫn:
+- https://support.google.com/websearch/answer/7368877
+- https://developers.google.com/search/docs/appearance/title-link
+- https://developers.google.com/search/docs/fundamentals/creating-helpful-content

@@ -13,12 +13,17 @@ export default function Page() {
     <main id="main" className="content-page">
       <div className="wrap policy-content">
         <span className="eyebrow">CHỌN CHUYẾN ĐI CỦA BẠN</span>
-        <h1>Đội xe Như Quỳnh — đón bạn ở nhiều khu vực.</h1>
+        <h1>Taxi Hưng Yên — Đội xe Như Quỳnh đón bạn ở nhiều khu vực.</h1>
         <p className="page-lead">
           Như Quỳnh là tên đội xe. Chúng tôi nhận đón tại {serviceAreaText} và
           khu vực lân cận, đi Nội Bài, Hà Nội và các tỉnh. Bạn chọn hành trình,
           thời gian và dòng xe mong muốn; đội xe kiểm tra lịch và liên hệ xác
           nhận trước chuyến đi.
+        </p>
+        <p>
+          Gọi đặt taxi Hưng Yên: <a href={CONTACT.telephone}>{CONTACT.phone}</a>
+          {" · "}
+          <a href={CONTACT.zalo}>Nhắn Zalo</a>
         </p>
         <nav aria-label="Dịch vụ xe">
           <ul>
@@ -90,6 +95,27 @@ export default function Page() {
           </p>
           <Link href="/dat-xe">Chọn điểm đón tại Mỹ Hào</Link>
         </article>
+        <article id="yen-my-pho-noi">
+          <h2>Taxi Yên Mỹ, Phố Nối và Mỹ Hào: chọn đúng điểm đón</h2>
+          <p>
+            Khi đặt xe giữa Yên Mỹ, Phố Nối và Mỹ Hào, hãy cung cấp địa chỉ cụ
+            thể ở cả hai đầu hành trình. Chọn ghim trên bản đồ nếu tên đường
+            hoặc khu vực chưa đủ rõ; ghi chú cổng nhà máy, khu dân cư hay điểm
+            hẹn để tài xế liên hệ xác nhận nơi đón và trả khách.
+          </p>
+          <Link href="/dat-xe">Chọn điểm đi và điểm đến</Link>
+        </article>
+        <article id="taxi-dien">
+          <h2>Đặt taxi điện tại Hưng Yên</h2>
+          <p>
+            Đội xe có các dòng xe điện VinFast hiển thị trên website. Bạn có thể
+            lọc Xe điện ở trang chủ, xem số hành khách và hành lý của từng xe
+            trước khi gửi yêu cầu. Dòng xe mong muốn cần được đội xe kiểm tra
+            lịch và xác nhận; giá chính thức được tài xế trao đổi trước chuyến
+            đi.
+          </p>
+          <Link href="/#doi-xe">Xem các dòng xe điện</Link>
+        </article>
         <article id="taxi-nhu-quynh">
           <h2>Đặt taxi tại Như Quỳnh, Văn Lâm</h2>
           <p>
@@ -133,12 +159,12 @@ export default function Page() {
             nhà ga để đội xe kiểm tra khả năng sắp xếp. Liên hệ trực tiếp để
             thống nhất điểm hẹn và chi phí chờ nếu có.
           </p>
-          <Link href="/dat-xe?from=nhu-quynh&to=noi-bai">
-            Đặt xe đi Nội Bài
+          <Link href="/xe-san-bay-noi-bai">
+            Xem hướng dẫn đặt taxi Hưng Yên đi Nội Bài
           </Link>
         </article>
         <article id="xe-ha-noi">
-          <h2>Xe đi Hà Nội từ các khu vực phục vụ</h2>
+          <h2>Taxi Hưng Yên đi Hà Nội</h2>
           <p>
             Đặt xe đi làm việc, thăm người thân, đến bệnh viện hoặc bến xe tại
             Hà Nội bằng cách nhập địa chỉ đến cụ thể. Ghi rõ cổng, tòa nhà hay
@@ -166,14 +192,23 @@ export default function Page() {
           </p>
           <Link href="/bang-gia">Xem cách tính giá xe</Link>
         </article>
-        <article>
-          <h2>Gọi đặt xe Như Quỳnh bằng số nào?</h2>
+        <article id="so-dien-thoai">
+          <h2>Số điện thoại đặt taxi Như Quỳnh, Yên Mỹ, Mỹ Hào</h2>
           <p>
             Gọi <a href={CONTACT.telephone}>{CONTACT.phone}</a> hoặc{" "}
             <a href={CONTACT.zalo}>nhắn Zalo cho đội xe</a>. Khi liên hệ, cung
             cấp điểm đón, điểm đến, giờ đi, số hành khách và nhu cầu một chiều
             hay khứ hồi để được tư vấn chuyến phù hợp.
           </p>
+          <h2>Giá taxi Hưng Yên được tính thế nào?</h2>
+          <p>
+            Giá dự kiến được tính theo dòng xe, quãng đường và lựa chọn một
+            chiều hoặc khứ hồi. Bạn có thể xem bảng cước hoặc nhập hành trình để
+            tham khảo chi phí. Tài xế sẽ liên hệ báo giá chính thức để bạn thống
+            nhất trước khi đi; phí cầu đường, bãi đỗ, chờ và yêu cầu phát sinh
+            cần được trao đổi riêng.
+          </p>
+          <Link href="/bang-gia">Tham khảo giá taxi 5–7 chỗ</Link>
           <h2>Đặt xe online có cần tài khoản không?</h2>
           <p>
             Bạn đặt trực tiếp trên website bằng họ tên và số điện thoại, không

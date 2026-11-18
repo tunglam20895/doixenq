@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: {
-    default: "Đội xe Như Quỳnh | Taxi Hưng Yên, Yên Mỹ, Mỹ Hào",
+    default: "Taxi Hưng Yên 5–7 chỗ | Đội xe Như Quỳnh",
     template: "%s | Đội xe Như Quỳnh",
   },
   description: `Đội xe Như Quỳnh nhận đón tại ${serviceAreaText}. Xe 5–7 chỗ đi Nội Bài, Hà Nội và liên tỉnh. Gọi 0977823111.`,

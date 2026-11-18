@@ -94,6 +94,7 @@ export function Footer() {
               <Link href="/#tai-xe">Gặp tài xế</Link>
               <Link href="/tra-cuu">Tra cứu chuyến</Link>
               <Link href="/bang-gia">Xem bảng giá</Link>
+              <Link href="/xe-san-bay-noi-bai">Taxi Hưng Yên đi Nội Bài</Link>
             </div>
             <div>
               <h3>Thông tin cần biết</h3>
