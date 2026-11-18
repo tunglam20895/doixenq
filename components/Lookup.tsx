@@ -1,4 +1,5 @@
 "use client";
+import { ESTIMATED_FARE_NOTE, FARE_EXCLUSIONS } from "@/lib/fare-copy";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -344,8 +345,7 @@ function BookingCard({ booking }: { booking: PublicBooking }) {
         <strong>{money(booking.actualTotal ?? booking.total)}</strong>
       </div>
       <p className="input-hint">
-        Chưa gồm phí cầu đường, bãi đỗ, chờ và phát sinh. Giá cần được đội xe
-        xác nhận.
+        {ESTIMATED_FARE_NOTE} {FARE_EXCLUSIONS}
       </p>
       {booking.status === "requested" ? (
         <div className="info-note">

@@ -48,8 +48,10 @@ test("khách lọc xe, đặt và tra cứu; không còn phần 3D", async ({
     .getByRole("button", { name: "Đặt xe ngay", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Chuyến xe đã được xác nhận." }),
+    page.getByRole("heading", { name: "Đã nhận lịch đặt xe của bạn." }),
   ).toBeVisible();
+  await expect(page.locator(".success-card")).toContainText("chưa phải giá cuối cùng");
+  await expect(page.locator(".success-card")).toContainText("báo giá chính thức");
   const code = await page.locator(".booking-code>strong").textContent();
   expect(code).toMatch(/^NQ-/);
   const qr = page.getByRole("img", { name: `QR tra cứu chuyến ${code}` });

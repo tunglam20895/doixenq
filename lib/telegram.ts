@@ -22,7 +22,7 @@ export async function notify(b: Booking) {
     b.returnAt ? `Về: ${tripDate(b.returnAt)}` : "",
     `Giá dự kiến: ${money(b.total)} · chưa gồm cầu đường, bãi đỗ, chờ`,
     `Ghi chú: ${b.note || "Không có"}`,
-    `Chuyến đã tự động xác nhận. Phân công tài xế hoặc cập nhật hủy trên admin.`,
+    `Đã nhận lịch đặt xe. Phân công tài xế liên hệ xác nhận hành trình và thống nhất giá chính thức với khách trước chuyến.`,
   ]
     .filter(Boolean)
     .join("\n");

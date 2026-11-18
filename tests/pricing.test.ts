@@ -3,16 +3,16 @@ import assert from "node:assert/strict";
 import { calculateFare, validateDeparture } from "../lib/pricing";
 import { sign, verify, equal } from "../lib/security";
 test("cước km đầu, bậc 30 km và đường dài không bị tính trùng", () => {
-  assert.equal(calculateFare("limo", 1).total, 18000);
-  assert.equal(calculateFare("limo", 30).total, 395000);
-  assert.equal(calculateFare("limo", 40).total, 505000);
-  assert.equal(calculateFare("vf5", 40).total, 429000);
+  assert.equal(calculateFare("limo", 1).total, 17000);
+  assert.equal(calculateFare("limo", 30).total, 365000);
+  assert.equal(calculateFare("limo", 40).total, 465000);
+  assert.equal(calculateFare("vf5", 40).total, 389000);
 });
 test("chuyến ngắn hơn 1 km vẫn tính cước mở cửa", () => {
-  assert.equal(calculateFare("limo", 0.3).total, 18000);
+  assert.equal(calculateFare("limo", 0.3).total, 17000);
 });
 test("khứ hồi tính đủ hai lượt, không nhân đôi quãng đường trước khi áp bậc", () => {
-  assert.equal(calculateFare("limo", 40, true).total, 1010000);
+  assert.equal(calculateFare("limo", 40, true).total, 930000);
   assert.equal(calculateFare("limo", 40, true).legs, 2);
 });
 test("từ chối số km âm, vô hạn, quá xa và xe lạ", () => {
@@ -53,8 +53,8 @@ test("khứ hồi phải có giờ về sau thời gian đến dự kiến", () 
 });
 test("báo giá ký không sửa được giá hoặc quãng đường", () => {
   process.env.AUTH_SECRET = "test-secret-for-signing-at-least-32-characters";
-  const value = sign({ total: 505000, km: 40 });
-  assert.deepEqual(verify(value), { total: 505000, km: 40 });
+  const value = sign({ total: 465000, km: 40 });
+  assert.deepEqual(verify(value), { total: 465000, km: 40 });
   const [body, sig] = value.split(".");
   const changed = Buffer.from(JSON.stringify({ total: 1, km: 40 })).toString(
     "base64url",
@@ -62,4 +62,18 @@ test("báo giá ký không sửa được giá hoặc quãng đường", () => {
   assert.throws(() => verify(changed + "." + sig));
   assert.throws(() => verify(body + ".wrong"));
   assert.equal(equal("a", "ab"), false);
+});
+
+test("giá dự kiến 40 km của cả 6 dòng xe theo bảng cước mới", () => {
+  const expected = {
+    limo: 465000,
+    ertiga: 465000,
+    vf5: 389000,
+    vios: 389000,
+    vf6: 425000,
+    nerio: 408000,
+  };
+  for (const [vehicle, total] of Object.entries(expected)) {
+    assert.equal(calculateFare(vehicle, 40).total, total, vehicle);
+  }
 });

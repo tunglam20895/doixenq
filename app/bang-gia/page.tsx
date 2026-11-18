@@ -1,3 +1,4 @@
+import { ESTIMATED_FARE_NOTE } from "@/lib/fare-copy";
 import Link from "next/link";
 import { ArrowUpRight, Info } from "lucide-react";
 import { VEHICLES, money } from "@/lib/data";
@@ -12,11 +13,11 @@ export default function Page() {
     <main id="main" className="content-page">
       <div className="wrap">
         <span className="eyebrow">CHI PHÍ CHO HÀNH TRÌNH</span>
-        <h1>Biết giá trước khi đi.</h1>
+        <h1>Tham khảo chi phí, an tâm đặt xe.</h1>
         <p className="page-lead">
           Bảng cước mẫu để bạn trải nghiệm đặt xe.
           <br />
-          Giá thực tế cần được đội xe xác nhận trước chuyến.
+          {ESTIMATED_FARE_NOTE}
         </p>
         <div className="info-note">
           <Info size={19} />
@@ -58,8 +59,8 @@ export default function Page() {
               1.000đ gần nhất.
             </p>
             <p>
-              Ví dụ Limo Green đi 40 km: 18.000 + 29 × 13.000 + 10 × 11.000 ={" "}
-              <strong>505.000đ</strong>.
+              Ví dụ Limo Green đi 40 km: 17.000 + 29 × 12.000 + 10 × 10.000 ={" "}
+              <strong>465.000đ</strong>.
             </p>
           </article>
           <article>

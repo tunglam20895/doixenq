@@ -1,4 +1,5 @@
 "use client";
+import { ESTIMATED_FARE_NOTE, FARE_EXCLUSIONS } from "@/lib/fare-copy";
 import Link from "next/link";
 import TripLookupQR from "./TripLookupQR";
 import dynamic from "next/dynamic";
@@ -255,9 +256,10 @@ export default function Booking() {
               <CheckCircle2 size={40} />
             </span>
             <span className="eyebrow">ĐẶT XE THÀNH CÔNG</span>
-            <h1>Chuyến xe đã được xác nhận.</h1>
+            <h1>Đã nhận lịch đặt xe của bạn.</h1>
             <p>
-              Bạn đã đặt xe thành công. Đội xe sẽ sắp xếp tài xế.
+              Cảm ơn bạn đã đặt xe. Tài xế sẽ liên hệ xác nhận lịch đón và báo
+              giá chính thức.
               <br />
               Theo dõi chuyến để xem cập nhật từ đội xe.
             </p>
@@ -304,8 +306,7 @@ export default function Booking() {
               </div>
             </div>
             <p className="input-hint">
-              Chưa bao gồm phí cầu đường, bãi đỗ và chờ. Vui lòng giữ điện thoại
-              để đội xe liên hệ.
+              {ESTIMATED_FARE_NOTE} {FARE_EXCLUSIONS}
             </p>
             <TripLookupQR id={success.id} token={success.token} />
             <Link
@@ -771,7 +772,7 @@ export default function Booking() {
                 </label>
                 <p className="info-note">
                   <ShieldCheck size={18} />
-                  Chuyến được xác nhận ngay khi đặt thành công. Bạn chưa cần thanh toán ở bước này.
+                  {ESTIMATED_FARE_NOTE} Bạn chưa cần thanh toán ở bước này.
                 </p>
                 <div className="form-actions">
                   <button
@@ -876,8 +877,7 @@ export default function Booking() {
                 </strong>
               </div>
               <p className="input-hint">
-                Theo bảng giá mẫu. Chưa gồm cầu đường, bãi đỗ, phí chờ và phát
-                sinh. Đội xe sẽ xác nhận giá trước chuyến.
+                {ESTIMATED_FARE_NOTE} {FARE_EXCLUSIONS}
               </p>
               <div className="summary-guarantee">
                 <ShieldCheck size={17} />

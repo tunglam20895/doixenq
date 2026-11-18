@@ -1,3 +1,4 @@
+import { ESTIMATED_FARE_NOTE } from "@/lib/fare-copy";
 import Link from "next/link";
 import { CONTACT } from "@/lib/contact";
 export const metadata = {
@@ -34,8 +35,8 @@ export default function Page() {
           <p>
             Giá hiển thị được tính theo bảng cước mẫu và quãng đường. Phí cầu
             đường, bãi đỗ, chờ, thay đổi điểm đón/đến hoặc yêu cầu khác chưa bao
-            gồm. Hai bên cần thống nhất tổng giá trước chuyến. Website hiện
-            không thu tiền và không yêu cầu cung cấp thông tin thẻ.
+            gồm. {ESTIMATED_FARE_NOTE} Website hiện không thu tiền và không yêu
+            cầu cung cấp thông tin thẻ.
           </p>
         </article>
         <article>

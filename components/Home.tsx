@@ -1,4 +1,5 @@
 "use client";
+import { ESTIMATED_FARE_NOTE, FARE_EXCLUSIONS } from "@/lib/fare-copy";
 import { serviceAreaText } from "@/lib/service-areas";
 import Link from "next/link";
 import dynamic from "next/dynamic";
@@ -87,7 +88,7 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
             <div className="hero-promises">
               <span>
                 <Check size={16} />
-                Biết giá trước chuyến
+                Thống nhất giá trước chuyến
               </span>
               <span>
                 <Check size={16} />
@@ -495,7 +496,7 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
             {[
               [
                 "Giá trên website đã là giá cuối cùng chưa?",
-                "Đây là giá dự kiến theo hành trình và bảng giá mẫu. Phí cầu đường, bãi đỗ, chờ và thay đổi hành trình chưa bao gồm. Đội xe sẽ liên hệ xác nhận giá trước chuyến.",
+                `${ESTIMATED_FARE_NOTE} ${FARE_EXCLUSIONS}`,
               ],
               [
                 "Tôi có được chọn đúng xe và tài xế không?",
