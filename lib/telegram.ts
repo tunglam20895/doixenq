@@ -1,5 +1,9 @@
 import { type Booking, updateBooking } from "./db";
 import { VEHICLES, DRIVERS, money, tripDate } from "./data";
+import { backend } from "./supabase/backend";
+import type { Driver, AdminBooking } from "./admin/types";
+import { driverPriorityLines } from "./telegram-driver-priority";
+
 export async function notify(b: Booking) {
   if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_CHAT_ID) {
     b.notification = "not_configured";
@@ -8,6 +12,15 @@ export async function notify(b: Booking) {
   }
   const v = VEHICLES.find((x) => x.id === b.vehicleId);
   const d = DRIVERS.find((x) => x.id === b.driverId);
+  const suggestions = await driverPriorityLines(b, {
+    drivers: () => backend<Driver[]>("drivers"),
+    completed: (offset) =>
+      backend<{ items: AdminBooking[]; total: number }>("bookings", {
+        status: "completed",
+        offset,
+        limit: 100,
+      }),
+  });
   const text = [
     `CHUYẾN XE ĐÃ XÁC NHẬN — ${b.id}`,
     `Đội xe Như Quỳnh Hưng Yên`,
@@ -17,6 +30,7 @@ export async function notify(b: Booking) {
     `Đến: ${b.destination.name} — ${b.destination.address}`,
     `Xe mong muốn: ${v?.name}`,
     `Tài xế mong muốn: ${b.driverName || d?.name || "Đội xe sắp xếp"}`,
+    ...suggestions,
     `Số khách: ${b.passengers}`,
     `Hành trình: ${b.distanceKm} km một chiều · ${b.roundTrip ? "Khứ hồi" : "Một chiều"}`,
     b.returnAt ? `Về: ${tripDate(b.returnAt)}` : "",
