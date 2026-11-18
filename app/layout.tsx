@@ -6,20 +6,26 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: {
-    default: "Taxi Như Quỳnh Hưng Yên | Đặt xe 5–7 chỗ, xe sân bay",
+    default: "Đội xe Như Quỳnh | Taxi Văn Lâm, Phố Nối & xe sân bay",
     template: "%s | Đội xe Như Quỳnh",
   },
   description:
-    "Taxi Như Quỳnh, Văn Lâm, Hưng Yên. Đặt xe 5–7 chỗ đi Nội Bài, Hà Nội và liên tỉnh, xem giá dự kiến. Gọi hoặc Zalo 0977823111.",
+    "Đội xe Như Quỳnh phục vụ Như Quỳnh, Văn Lâm, Phố Nối và khu vực lân cận. Đặt xe 5–7 chỗ đi Nội Bài, Hà Nội, liên tỉnh. Gọi hoặc Zalo 0977823111.",
   openGraph: {
-    title: "Đội xe Như Quỳnh Hưng Yên",
+    siteName: "Đội xe Như Quỳnh",
+    title: "Đội xe Như Quỳnh",
     description:
-      "Từ Như Quỳnh, đi cùng bạn. Xe 5–7 chỗ, đặt lịch ngay trên điện thoại.",
+      "Đón tại Như Quỳnh, Văn Lâm, Phố Nối và khu vực lân cận. Xe 5–7 chỗ đi sân bay, Hà Nội và liên tỉnh.",
     locale: "vi_VN",
     type: "website",
   },
   robots: { index: true, follow: true },
-  icons: { icon: "/icon.svg" },
+  icons: {
+    icon: [
+      { url: "/brand/favicon-96.png", sizes: "96x96", type: "image/png" },
+      { url: "/brand/favicon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+  },
 };
 export default function RootLayout({
   children,

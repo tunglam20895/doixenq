@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { CONTACT } from "@/lib/contact";
-export const metadata = { title: "Chính sách đặt xe & bảo mật" };
+export const metadata = {
+  title: "Chính sách đặt xe & bảo mật",
+  description:
+    "Thông tin về xác nhận chuyến, giá dự kiến, thay đổi hoặc hủy chuyến và bảo mật thông tin khi đặt xe với Đội xe Như Quỳnh.",
+  alternates: { canonical: "/chinh-sach" },
+};
 export default function Page() {
   return (
     <main id="main" className="content-page">
@@ -14,7 +19,9 @@ export default function Page() {
         <article>
           <h2>1. Yêu cầu đặt xe và xác nhận</h2>
           <p>
-            Chuyến được tự động xác nhận khi đặt thành công. Đội xe sắp xếp tài xế và cập nhật trạng thái tiếp tục, hoàn thành hoặc hủy trên hệ thống. Khách có thể theo dõi qua đường dẫn tra cứu riêng.
+            Chuyến được tự động xác nhận khi đặt thành công. Đội xe sắp xếp tài
+            xế và cập nhật trạng thái tiếp tục, hoàn thành hoặc hủy trên hệ
+            thống. Khách có thể theo dõi qua đường dẫn tra cứu riêng.
           </p>
           <p>
             Ảnh minh họa dòng xe có thể khác màu, phiên bản và xe thực tế. Bảng
@@ -49,8 +56,9 @@ export default function Page() {
             chuyển tới nhóm điều hành được chỉ định.
           </p>
           <p>
-            Website không công khai hành trình của bạn. Tra cứu bằng số điện thoại khớp 9 số cuối, hoặc đường dẫn tra cứu riêng. Không
-            chia sẻ đường dẫn đó cho người không liên quan.
+            Website không công khai hành trình của bạn. Tra cứu bằng số điện
+            thoại khớp 9 số cuối, hoặc đường dẫn tra cứu riêng. Không chia sẻ
+            đường dẫn đó cho người không liên quan.
           </p>
           <p>
             Thiết bị có thể lưu mã và khóa tra cứu cho tối đa 5 chuyến gần nhất.
@@ -64,12 +72,13 @@ export default function Page() {
           <p>
             Bản đồ mặc định dùng OpenStreetMap và OSRM. Khi tìm địa chỉ, nội
             dung bạn gõ được gửi tới Photon/OpenStreetMap; khi chọn ghim, tọa độ
-            được gửi để tìm địa chỉ gần đó. Khi được cấu hình, website dùng VIETMAP để gợi ý địa điểm và tìm địa chỉ từ tọa độ, hoặc Google Maps để hiển thị, gợi ý địa điểm và tính hành trình. Nội dung
-            bạn gõ để tìm địa điểm được gửi tới Google khi tính năng này được
-            bật. Điểm đi và điểm đến được gửi tới dịch vụ bản đồ đang sử dụng.
-            Thời gian đi và quãng đường có thể khác thực tế. Khi không truy cập
-            được dịch vụ, một số tuyến phổ biến dùng số km mẫu và được ghi rõ
-            trên màn hình.
+            được gửi để tìm địa chỉ gần đó. Khi được cấu hình, website dùng
+            VIETMAP để gợi ý địa điểm và tìm địa chỉ từ tọa độ, hoặc Google Maps
+            để hiển thị, gợi ý địa điểm và tính hành trình. Nội dung bạn gõ để
+            tìm địa điểm được gửi tới Google khi tính năng này được bật. Điểm đi
+            và điểm đến được gửi tới dịch vụ bản đồ đang sử dụng. Thời gian đi
+            và quãng đường có thể khác thực tế. Khi không truy cập được dịch vụ,
+            một số tuyến phổ biến dùng số km mẫu và được ghi rõ trên màn hình.
           </p>
         </article>
         <article>

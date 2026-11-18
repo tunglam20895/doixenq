@@ -77,7 +77,7 @@ export function Footer() {
       <div className="wrap">
         <div className="footer-top">
           <div>
-            <span className="eyebrow">ĐỘI XE NHƯ QUỲNH HƯNG YÊN</span>
+            <span className="eyebrow">ĐỘI XE NHƯ QUỲNH</span>
             <h2>
               Chuyến tới,
               <br />
@@ -100,7 +100,7 @@ export function Footer() {
               <Link href="/chinh-sach">Đặt xe & hủy chuyến</Link>
               <Link href="/chinh-sach#bao-mat">Bảo mật thông tin</Link>
               <span className="footer-location">
-                <MapPin size={17} /> Như Quỳnh, Hưng Yên
+                <MapPin size={17} /> Như Quỳnh · Văn Lâm · Phố Nối
               </span>
               <a href={CONTACT.telephone}>Hotline: {CONTACT.phone}</a>
               <a href={CONTACT.zalo} target="_blank" rel="noopener noreferrer">
@@ -118,7 +118,7 @@ export function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} Đội xe Như Quỳnh Hưng Yên.</span>
+          <span>© {new Date().getFullYear()} Đội xe Như Quỳnh.</span>
           <span>Bản trải nghiệm · Bảng giá mẫu.</span>
           <Link href="/nguon-anh">
             Nguồn hình ảnh <ArrowUpRight size={12} />

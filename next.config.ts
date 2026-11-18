@@ -3,6 +3,18 @@ const config: NextConfig = {
   poweredByHeader: false,
   devIndicators: false,
   serverExternalPackages: ["postgres"],
+  async redirects() {
+    return [
+      "doixenq.com",
+      "doixenq.vercel.app",
+      "nhu-quynh-hung-yen.vercel.app",
+    ].map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host" as const, value: host }],
+      destination: "https://www.doixenq.com/:path*",
+      permanent: true,
+    }));
+  },
   async headers() {
     return [
       {

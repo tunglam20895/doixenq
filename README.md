@@ -4,8 +4,8 @@ Website khách đặt xe và khu vực admin riêng, Next.js 16 / React / TypeSc
 
 ## Mở ứng dụng
 
-- Website chính thức: https://doixenq.vercel.app
-- Admin: https://doixenq.vercel.app/admin
+- Website chính thức: https://www.doixenq.com
+- Admin: https://www.doixenq.com/admin
 - Local: http://localhost:3000 và http://localhost:3000/admin
 - Đăng nhập bằng tên người dùng `admin`, không cần email. Mật khẩu khởi tạo đã thiết lập theo yêu cầu chủ đội xe, được lưu dưới dạng scrypt trong database; không được ghi trong mã nguồn. Đổi tại **Cài đặt**.
 

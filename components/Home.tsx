@@ -65,13 +65,13 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
               XE 5–7 CHỖ · HƯNG YÊN
             </span>
             <h1 id="hero-title">
-              Từ Như Quỳnh,
+              Đội xe Như Quỳnh,
               <br />
               đi cùng <span>bạn.</span>
             </h1>
             <p className="hero-lead">
-              Taxi Như Quỳnh, Văn Lâm, Hưng Yên. Xe đi Nội Bài, Hà Nội và liên
-              tỉnh.
+              Đón khách tại Như Quỳnh, Văn Lâm, Phố Nối và khu vực lân cận. Xe
+              5–7 chỗ đi Nội Bài, Hà Nội và liên tỉnh.
               <br className="desktop-only" /> Chọn chiếc xe bạn thích. Hẹn giờ,
               mình đón.
             </p>
@@ -95,7 +95,7 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
             </div>
             <div className="hero-coordinate">
               <MapPin size={14} />
-              <span>Xuất phát từ Như Quỳnh, Hưng Yên</span>
+              <span>Phục vụ Như Quỳnh · Văn Lâm · Phố Nối</span>
             </div>
           </div>
           <div className="hero-showcase" data-enter-media>
@@ -340,7 +340,11 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
             ))}
           </div>
           <p className="section-note">
-            Điểm đến khác? Chọn địa chỉ hoặc ghim trên bản đồ ở trang đặt xe.
+            Điểm đến khác? Chọn địa chỉ hoặc ghim trên bản đồ ở trang đặt xe.{" "}
+            <Link href="/dich-vu">
+              Xem dịch vụ taxi Như Quỳnh, Văn Lâm, Phố Nối và xe sân bay
+            </Link>
+            .
           </p>
         </div>
       </section>
