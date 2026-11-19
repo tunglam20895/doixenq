@@ -98,3 +98,14 @@ Nguồn: https://developers.google.com/search/docs/appearance/site-names
 Bổ sung /taxi-hung-yen, /taxi-yen-my, /taxi-my-hao, /taxi-pho-noi. Mỗi trang có nội dung riêng theo nhu cầu đặt xe, canonical riêng, tiêu đề/mô tả và Service JSON-LD khai đúng khu vực. Dữ liệu tại lib/taxi-areas.ts, trình bày bằng components/TaxiAreaPage.tsx. Các trang được liên kết từ trang chủ, trang dịch vụ, liên kết qua lại và sitemap.
 
 Không khai địa chỉ văn phòng hay điểm đón giả, không tự tạo tọa độ cho khu vực, không báo giá cố định. Nút đặt xe yêu cầu khách chọn địa chỉ cụ thể; giữ thông báo giá dự kiến và tài xế liên hệ báo giá chính thức. Google tự quyết định lập chỉ mục và thứ hạng, không bảo đảm xuất hiện với mọi truy vấn.
+
+
+## Cải thiện trang khu vực sau kiểm tra thứ hạng
+
+Ưu tiên nội dung hữu ích trên trang Hưng Yên, Yên Mỹ, Mỹ Hào: rút gọn title theo ý định đặt xe và giá dự kiến, bảng so sánh 6 dòng xe theo số khách/hành lý, bảng cước minh họa 10/30/50 km tính trực tiếp bằng calculateFare và VEHICLES. Cùng thành phần được dùng cho Phố Nối nhưng giữ tiêu đề hiện có. Không coi các khoảng cách minh họa là quãng đường của tuyến thực tế. Tất cả giá vẫn được ghi là dự kiến, chưa bao gồm phí phát sinh và cần tài xế thống nhất trước chuyến.
+
+Bổ sung liên kết 4 khu vực trong footer, mô tả phân biệt các khu vực ở trang chủ và mục lục nội dung trên từng trang. Không tạo thêm trang lặp hoặc địa chỉ/đánh giá giả.
+
+Kiểm tra Google trực tiếp: trang chủ đã hiển thị “Đội xe Như Quỳnh: Taxi Hưng Yên 5–7 chỗ” và mô tả khu vực mới; một số trang con vẫn dùng nội dung cũ. Screenshot quan sát vẫn thấy favicon mặc định. URL Inspection trang chủ báo lần thu thập gần nhất 16:18:19 ngày 18/11/2026. Favicon PNG 96x96, 512x512 và ICO đều trả HTTP 200 khi gửi User-Agent Googlebot-Image; robots không chặn. Điều này xác nhận máy chủ cung cấp file, không chứng minh Google đã thu thập/chấp nhận favicon.
+
+Google không công bố thời điểm đổi favicon. Hướng dẫn nêu thời gian thu thập lại có thể vài ngày đến vài tuần và không bảo đảm hiển thị ngay cả khi đáp ứng yêu cầu. Giữ URL favicon ổn định. Nguồn: https://developers.google.com/search/docs/appearance/favicon-in-search

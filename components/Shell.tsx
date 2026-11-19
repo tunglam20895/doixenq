@@ -14,6 +14,7 @@ import {
   Send,
   MessageCircle,
 } from "lucide-react";
+import { taxiAreaLinks } from "@/lib/service-areas";
 import { CONTACT } from "@/lib/contact";
 import { usePathname } from "next/navigation";
 export function Header() {
@@ -99,6 +100,11 @@ export function Footer() {
             <div>
               <h3>Thông tin cần biết</h3>
               <Link href="/dich-vu">Khu vực phục vụ & dịch vụ xe</Link>
+              {taxiAreaLinks.map((area) => (
+                <Link href={area.href} key={area.href}>
+                  {area.label}
+                </Link>
+              ))}
               <Link href="/chinh-sach">Đặt xe & hủy chuyến</Link>
               <Link href="/chinh-sach#bao-mat">Bảo mật thông tin</Link>
               <span className="footer-location">

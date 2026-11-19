@@ -373,7 +373,7 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
                 <h3>
                   <Link href={area.href}>{area.label}</Link>
                 </h3>
-                <p>Xem điểm đón, cách đặt xe và thông tin giá dự kiến.</p>
+                <p>{area.summary}</p>
               </article>
             ))}
           </div>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { VEHICLES, money } from "@/lib/data";
+import { calculateFare } from "@/lib/pricing";
 import { CONTACT } from "@/lib/contact";
 import { ESTIMATED_FARE_NOTE, FARE_EXCLUSIONS } from "@/lib/fare-copy";
 import { siteUrl } from "@/lib/site";
@@ -7,7 +9,10 @@ import { taxiAreas, type TaxiArea } from "@/lib/taxi-areas";
 
 export function taxiAreaMetadata(area: TaxiArea): Metadata {
   return {
-    title: area.title,
+    title:
+      area.slug === "taxi-pho-noi"
+        ? area.title
+        : `Taxi ${area.name} 5–7 chỗ — đặt xe & giá dự kiến`,
     description: area.description,
     alternates: { canonical: `/${area.slug}` },
     openGraph: {
@@ -63,22 +68,108 @@ export default function TaxiAreaPage({ area }: { area: TaxiArea }) {
         <Link href="/dat-xe" className="btn btn-primary">
           Chọn địa chỉ đón & xem giá dự kiến
         </Link>
+        <nav aria-label="Thông tin đặt xe">
+          <ul>
+            <li>
+              <a href="#chon-xe">Chọn dòng xe và sức chứa</a>
+            </li>
+            <li>
+              <a href="#gia-du-kien">Xem giá dự kiến theo km</a>
+            </li>
+            <li>
+              <a href="#hoi-dap">Câu hỏi trước khi đặt</a>
+            </li>
+          </ul>
+        </nav>
         {area.sections.map((section) => (
           <article key={section.title}>
             <h2>{section.title}</h2>
             <p>{section.text}</p>
           </article>
         ))}
-        <article>
+        <article id="chon-xe">
+          <h2>Chọn xe khi đặt taxi {area.name}</h2>
+          <p>
+            So sánh số khách và hành lý trước khi chọn xe. Số chỗ bao gồm tài
+            xế; sức chứa hành lý là thông tin tham khảo của dòng xe, cần trao
+            đổi thêm nếu mang vali lớn hoặc đồ cồng kềnh.
+          </p>
+          <div className="price-table-wrap">
+            <table className="price-table">
+              <caption>Xe 5–7 chỗ nhận yêu cầu đặt tại {area.name}</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Dòng xe</th>
+                  <th scope="col">Khách tối đa</th>
+                  <th scope="col">Hành lý tham khảo</th>
+                  <th scope="col">Đặt xe</th>
+                </tr>
+              </thead>
+              <tbody>
+                {VEHICLES.map((vehicle) => (
+                  <tr key={vehicle.id}>
+                    <th scope="row">
+                      {vehicle.name}
+                      <span>
+                        {vehicle.seats} chỗ ·{" "}
+                        {vehicle.electric ? "Xe điện" : "Xe xăng"}
+                      </span>
+                    </th>
+                    <td>{vehicle.passengers} khách</td>
+                    <td>{vehicle.luggage} kiện</td>
+                    <td>
+                      <Link href={`/dat-xe?vehicle=${vehicle.id}`}>
+                        Chọn {vehicle.name}
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </article>
+        <article id="gia-du-kien">
           <h2>Giá taxi {area.name} được tính thế nào?</h2>
           <p>
             {ESTIMATED_FARE_NOTE} {FARE_EXCLUSIONS}
           </p>
+          <p>
+            Bảng dưới minh họa cước một chiều theo số km, không phải khoảng cách
+            hay giá trọn gói của một tuyến cụ thể tại {area.name}. Hành trình
+            thực tế cần chọn đúng địa chỉ đi và đến.
+          </p>
+          <div className="price-table-wrap">
+            <table className="price-table">
+              <caption>Giá dự kiến một chiều theo quãng đường — VNĐ</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Dòng xe</th>
+                  {[10, 30, 50].map((km) => (
+                    <th scope="col" key={km}>
+                      {km} km
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {VEHICLES.map((vehicle) => (
+                  <tr key={vehicle.id}>
+                    <th scope="row">{vehicle.name}</th>
+                    {[10, 30, 50].map((km) => (
+                      <td key={km}>
+                        {money(calculateFare(vehicle.id, km).total)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
           <Link href="/bang-gia">
             Xem bảng cước tham khảo và cách tính theo km
           </Link>
         </article>
-        <article>
+        <article id="hoi-dap">
           <h2>{area.question}</h2>
           <p>{area.answer}</p>
         </article>
