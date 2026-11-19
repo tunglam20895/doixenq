@@ -91,3 +91,10 @@ Google trực tiếp với “taxi Như Quỳnh” vẫn có /dich-vu ở trang 
 Bổ sung WebSite JSON-LD trên trang chủ với tên “Đội xe Như Quỳnh”, URL canonical, ngôn ngữ vi-VN. Đây là tín hiệu đề xuất tên website, không phải cách can thiệp autocomplete hoặc bảo đảm đổi tên hiển thị.
 
 Nguồn: https://developers.google.com/search/docs/appearance/site-names
+
+
+## Trang theo khu vực phục vụ
+
+Bổ sung /taxi-hung-yen, /taxi-yen-my, /taxi-my-hao, /taxi-pho-noi. Mỗi trang có nội dung riêng theo nhu cầu đặt xe, canonical riêng, tiêu đề/mô tả và Service JSON-LD khai đúng khu vực. Dữ liệu tại lib/taxi-areas.ts, trình bày bằng components/TaxiAreaPage.tsx. Các trang được liên kết từ trang chủ, trang dịch vụ, liên kết qua lại và sitemap.
+
+Không khai địa chỉ văn phòng hay điểm đón giả, không tự tạo tọa độ cho khu vực, không báo giá cố định. Nút đặt xe yêu cầu khách chọn địa chỉ cụ thể; giữ thông báo giá dự kiến và tài xế liên hệ báo giá chính thức. Google tự quyết định lập chỉ mục và thứ hạng, không bảo đảm xuất hiện với mọi truy vấn.

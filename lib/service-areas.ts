@@ -9,3 +9,10 @@ export const serviceAreas = [
 ] as const;
 
 export const serviceAreaText = serviceAreas.join(", ");
+
+export const taxiAreaLinks = [
+  { href: "/taxi-hung-yen", label: "Taxi Hưng Yên" },
+  { href: "/taxi-yen-my", label: "Taxi Yên Mỹ" },
+  { href: "/taxi-my-hao", label: "Taxi Mỹ Hào" },
+  { href: "/taxi-pho-noi", label: "Taxi Phố Nối" },
+] as const;

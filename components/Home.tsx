@@ -1,7 +1,7 @@
 "use client";
 import { ESTIMATED_FARE_NOTE, FARE_EXCLUSIONS } from "@/lib/fare-copy";
 import { CONTACT } from "@/lib/contact";
-import { serviceAreaText } from "@/lib/service-areas";
+import { serviceAreaText, taxiAreaLinks } from "@/lib/service-areas";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -353,6 +353,30 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
             </Link>
             .
           </p>
+        </div>
+      </section>
+      <section className="section" aria-labelledby="service-areas-title">
+        <div className="wrap">
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">CHỌN KHU VỰC ĐÓN</span>
+              <h2 id="service-areas-title">Đặt taxi ở nơi bạn cần.</h2>
+            </div>
+            <p>
+              Như Quỳnh là tên đội xe. Chọn khu vực để xem hướng dẫn đặt chuyến
+              phù hợp.
+            </p>
+          </div>
+          <div className="policy-grid">
+            {taxiAreaLinks.map((area) => (
+              <article key={area.href}>
+                <h3>
+                  <Link href={area.href}>{area.label}</Link>
+                </h3>
+                <p>Xem điểm đón, cách đặt xe và thông tin giá dự kiến.</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
       <section className="section drivers-section" id="tai-xe">

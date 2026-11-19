@@ -1,4 +1,4 @@
-import { serviceAreaText } from "@/lib/service-areas";
+import { serviceAreaText, taxiAreaLinks } from "@/lib/service-areas";
 import Link from "next/link";
 import { CONTACT } from "@/lib/contact";
 
@@ -25,6 +25,16 @@ export default function Page() {
           {" · "}
           <a href={CONTACT.zalo}>Nhắn Zalo</a>
         </p>
+        <nav aria-label="Trang hướng dẫn theo khu vực">
+          <h2>Chọn khu vực bạn muốn đặt taxi</h2>
+          <ul>
+            {taxiAreaLinks.map((area) => (
+              <li key={area.href}>
+                <Link href={area.href}>{area.label}</Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
         <nav aria-label="Dịch vụ xe">
           <ul>
             <li>
