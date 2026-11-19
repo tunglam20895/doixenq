@@ -78,3 +78,16 @@ Nguồn hướng dẫn:
 - https://support.google.com/websearch/answer/7368877
 - https://developers.google.com/search/docs/appearance/title-link
 - https://developers.google.com/search/docs/fundamentals/creating-helpful-content
+
+
+## Kiểm tra ngày 19/11/2026
+
+Search Console 24 giờ (18–19/11, lần cập nhật hiển thị: 3,5 giờ trước): 2 lượt nhấp, 14 lượt hiển thị, CTR 14,3%, vị trí trung bình 4,1. Bảng truy vấn hiển thị “taxi như quỳnh”: 2 nhấp / 9 hiển thị. Không coi truy vấn duy nhất được báo cáo là toàn bộ truy vấn đã phát sinh hoặc toàn bộ nhu cầu thị trường.
+
+Bảng theo trang: trang chủ 1 nhấp / 11 hiển thị; /dich-vu 1 / 10; /dat-xe 0 / 2; /bang-gia 0 / 1. Không cộng số hiển thị theo trang để so với tổng thuộc tính vì cách tổng hợp khác nhau. Dữ liệu còn quá ít để kết luận xu hướng hay thay đổi tiêu đề hàng ngày.
+
+Google trực tiếp với “taxi Như Quỳnh” vẫn có /dich-vu ở trang đầu, dùng tiêu đề/mô tả cũ. Các kết quả còn phụ thuộc vị trí và phiên tìm kiếm; không khẳng định thứ hạng cố định. /xe-san-bay-noi-bai được URL Inspection báo Google chưa xác định URL; đã khởi động yêu cầu lập chỉ mục. Website thật vẫn trả HTTP 200, canonical mới và các favicon ICO/PNG đều truy cập được.
+
+Bổ sung WebSite JSON-LD trên trang chủ với tên “Đội xe Như Quỳnh”, URL canonical, ngôn ngữ vi-VN. Đây là tín hiệu đề xuất tên website, không phải cách can thiệp autocomplete hoặc bảo đảm đổi tên hiển thị.
+
+Nguồn: https://developers.google.com/search/docs/appearance/site-names

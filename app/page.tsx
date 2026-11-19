@@ -18,6 +18,19 @@ export default async function Page() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
+            "@type": "WebSite",
+            "@id": new URL("/#website", siteUrl).href,
+            name: "Đội xe Như Quỳnh",
+            url: siteUrl.href,
+            inLanguage: "vi-VN",
+          }).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
             "@type": "TaxiService",
             name: "Đội xe Như Quỳnh",
             "@id": new URL("/#doi-xe", siteUrl).href,
