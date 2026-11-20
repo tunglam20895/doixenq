@@ -92,7 +92,6 @@ export function Footer() {
             <div>
               <h3>Hành trình của bạn</h3>
               <Link href="/#doi-xe">Chọn dòng xe</Link>
-              <Link href="/#tai-xe">Gặp tài xế</Link>
               <Link href="/tra-cuu">Tra cứu chuyến</Link>
               <Link href="/bang-gia">Xem bảng giá</Link>
               <Link href="/xe-san-bay-noi-bai">Taxi Hưng Yên đi Nội Bài</Link>

@@ -20,14 +20,11 @@ export default function Page() {
         <article>
           <h2>1. Yêu cầu đặt xe và xác nhận</h2>
           <p>
-            Chuyến được tự động xác nhận khi đặt thành công. Đội xe sắp xếp tài
-            xế và cập nhật trạng thái tiếp tục, hoàn thành hoặc hủy trên hệ
-            thống. Khách có thể theo dõi qua đường dẫn tra cứu riêng.
+            Chuyến được tự động xác nhận khi đặt thành công. Đội xe cập nhật trạng thái chuyến trên hệ thống. Khách có thể theo dõi qua đường dẫn tra cứu riêng.
           </p>
           <p>
             Ảnh minh họa dòng xe có thể khác màu, phiên bản và xe thực tế. Bảng
-            giá hiện là dữ liệu mẫu; hồ sơ tài xế được đội xe cập nhật qua
-            admin.
+            giá hiện là dữ liệu mẫu.
           </p>
         </article>
         <article>

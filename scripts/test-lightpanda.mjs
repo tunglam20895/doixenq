@@ -22,9 +22,7 @@ await page.getByRole('heading',{name:'Hôm nay, mình đi đâu?'}).waitFor();
 ok('Đăng nhập giao diện admin thành công',true);
 const driver={id:'qa-lightpanda-'+Date.now(),name:'QA Lightpanda Tài xế',phone:'0900000077',intro:'Kiểm thử Lightpanda',area:'Như Quỳnh',vehicle_ids:['ertiga'],plate:'QA-LP',note:'AUTOMATED_TEST_ONLY_LIGHTPANDA',active:true,published:false};
 r=await call('/api/admin/drivers',driver);ok('Tạo tài xế trong database',r.status===200);
-r=await call('/api/drivers');ok('Tài xế chưa công khai được ẩn',!r.data.drivers.some(d=>d.id===driver.id));
-r=await call('/api/admin/drivers',{...driver,published:true});ok('Công khai tài xế',r.status===200);
-r=await call('/api/drivers');const pub=r.data.drivers.find(d=>d.id===driver.id);ok('Web khách nhận tài xế, không lộ điện thoại và ghi chú',pub && pub.phone===undefined && pub.note===undefined);
+r=await call('/api/drivers');ok('Danh sách tài xế chỉ phục vụ nội bộ',r.status===404);
 r=await call('/api/admin/bookings',{customer:'QA Lightpanda Khách',phone:'0900000078',pickup:'Như Quỳnh',destination:'Sân bay Nội Bài',departure:new Date(Date.now()+86400000).toISOString(),vehicleId:'ertiga',driverId:driver.id,total:180000,passengers:3,note:'AUTOMATED_TEST_ONLY_LIGHTPANDA'});ok('Tạo chuyến đã đặt',r.status===201 && r.data.status==='confirmed');let trip=r.data;
 async function stats(){const r=await call('/api/admin/customers?search=0900000078');assert.equal(r.status,200);return r.data.items.find(c=>c.phone==='0900000078');}
 let c=await stats();ok('Chuyến đã đặt chưa tính doanh thu',c.completed===0&&c.total_spent===0);
@@ -36,10 +34,10 @@ await update('cancelled',200000);c=await stats();ok('Hủy chuyến loại doanh
 const old=trip.version;await update('completed',230000);c=await stats();ok('Khôi phục hoàn thành tính lại 230.000đ',c.completed===1&&c.total_spent===230000);
 r=await update('cancelled',230000,old);ok('Cửa sổ cũ không ghi đè được',r.status===409);
 r=await call('/api/admin/events?id='+trip.id);ok('Có lịch sử thay đổi chuyến',r.status===200&&r.data.items.length>=5);
-r=await call('/api/lookup',{id:trip.id,phone:'0900000078'});ok('Khách tra cứu đúng trạng thái và tiền',r.status===200&&r.data.booking.status==='completed'&&r.data.booking.actualTotal===230000);
+r=await call('/api/lookup',{phone:'0900000078'});const booking=r.data.bookings?.find(b=>b.id===trip.id);ok('Khách tra cứu đúng trạng thái và tiền',r.status===200&&booking?.status==='completed'&&booking.actualTotal===230000);
 await page.goto(base+'/admin/khach-hang');await page.getByRole('textbox',{name:'Tìm tên hoặc số điện thoại',exact:true}).fill('0900000078');
 await page.waitForFunction(()=>document.querySelector('.admin-table tbody')?.textContent.includes('230.000'));ok('Giao diện khách hàng hiển thị tiền từ database',true);
-r=await call('/api/admin/drivers',{...driver,published:true,active:false});assert.equal(r.status,200);r=await call('/api/drivers');ok('Tài xế tạm nghỉ không hiện cho khách',!r.data.drivers.some(d=>d.id===driver.id));
+r=await call('/api/admin/drivers',{...driver,published:true,active:false});assert.equal(r.status,200);
 await page.getByRole('button',{name:'Đăng xuất',exact:true}).click();await page.waitForURL(/dang-nhap/);r=await call('/api/admin/customers');ok('Đăng xuất chặn truy cập lại dữ liệu',r.status===401);
 await page.goto(base);ok('Trang khách tải được bằng Lightpanda',(await page.title()).length>0);
 }finally{await writeFile('reports/lightpanda-results.json',JSON.stringify({date:new Date().toISOString(),browser:'Lightpanda',base,passed:checks.length,checks},null,2));await context.close();await browser.close();}

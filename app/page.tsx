@@ -1,16 +1,8 @@
 import { siteUrl } from "@/lib/site";
 import { serviceAreas } from "@/lib/service-areas";
 import Home from "@/components/Home";
-import { publicDrivers } from "@/lib/drivers";
 export const metadata = { alternates: { canonical: "/" } };
-export const dynamic = "force-dynamic";
-export default async function Page() {
-  let drivers: import("@/lib/admin/types").PublicDriver[];
-  try {
-    drivers = await publicDrivers();
-  } catch {
-    drivers = [];
-  }
+export default function Page() {
   return (
     <>
       <script
@@ -54,7 +46,7 @@ export default async function Page() {
           }).replace(/</g, "\u003c"),
         }}
       />
-      <Home drivers={drivers} />
+      <Home />
     </>
   );
 }

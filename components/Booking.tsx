@@ -30,7 +30,6 @@ import PlaceInput from "./PlaceInput";
 const LocationPicker = dynamic(() => import("./LocationPicker"), {
   ssr: false,
 });
-import type { PublicDriver } from "@/lib/admin/types";
 const RouteMap = dynamic(() => import("./RouteMap"), {
   ssr: false,
   loading: () => <div className="map-placeholder">Đang tải bản đồ…</div>,
@@ -72,27 +71,6 @@ function tomorrow() {
 }
 const toISO = (value: string) => new Date(value + ":00+07:00").toISOString();
 export default function Booking() {
-  const [drivers, setDrivers] = useState<PublicDriver[]>([]);
-  const [driversError, setDriversError] = useState(false);
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch("/api/drivers", { signal: controller.signal })
-      .then(async (r) => {
-        if (!r.ok) throw Error();
-        const d = await r.json();
-        setDrivers(d.drivers);
-        setDriverId((current) =>
-          current === "auto" ||
-          d.drivers.some((x: PublicDriver) => x.id === current)
-            ? current
-            : "auto",
-        );
-      })
-      .catch((e) => {
-        if (e.name !== "AbortError") setDriversError(true);
-      });
-    return () => controller.abort();
-  }, []);
   const params = useSearchParams();
   const initialVehicle = VEHICLES.some((v) => v.id === params.get("vehicle"))
     ? params.get("vehicle")!
@@ -108,7 +86,6 @@ export default function Booking() {
       null,
   );
   const [vehicleId, setVehicleId] = useState(initialVehicle);
-  const [driverId, setDriverId] = useState(params.get("driver") || "auto");
   const [departure, setDeparture] = useState("");
   const [returnAt, setReturnAt] = useState("");
   const [roundTrip, setRoundTrip] = useState(false);
@@ -137,7 +114,6 @@ export default function Booking() {
     requestId.current = crypto.randomUUID();
   }, []);
   const vehicle = VEHICLES.find((v) => v.id === vehicleId)!;
-  const driver = drivers.find((d) => d.id === driverId);
   const move = (next: number) => {
     setStep(next);
     setError("");
@@ -217,7 +193,6 @@ export default function Booking() {
           customer,
           phone: phone.replace(/\s/g, ""),
           note,
-          driverId,
           passengers,
           departure: toISO(departure),
           ...(roundTrip ? { returnAt: toISO(returnAt) } : {}),
@@ -341,14 +316,14 @@ export default function Booking() {
               {step === 1
                 ? "Chuyến tới, bạn đi đâu?"
                 : step === 2
-                  ? "Chọn người bạn đồng hành."
+                  ? "Bạn muốn đi xe nào?"
                   : "Hẹn giờ, mình đón."}
             </h1>
             <p>
               {step === 1
                 ? "Chọn điểm đi, điểm đến và thời gian của bạn."
                 : step === 2
-                  ? "Chọn dòng xe và tài xế bạn muốn đi cùng."
+                  ? "Chọn dòng xe phù hợp với số khách và xem giá dự kiến."
                   : "Kiểm tra hành trình và để lại thông tin liên hệ."}
             </p>
           </div>
@@ -358,7 +333,7 @@ export default function Booking() {
           </span>
         </div>
         <ol className="booking-steps" aria-label="Các bước đặt xe">
-          {["Hành trình", "Xe & tài xế", "Thông tin & xác nhận"].map((s, i) => (
+          {["Hành trình", "Chọn xe", "Thông tin & xác nhận"].map((s, i) => (
             <li
               key={s}
               className={
@@ -542,17 +517,7 @@ export default function Booking() {
                           "booking-vehicle " +
                           (vehicleId === v.id ? "selected" : "")
                         }
-                        onClick={() => {
-                          setVehicleId(v.id);
-                          if (
-                            !drivers.some(
-                              (d) =>
-                                d.id === driverId &&
-                                d.vehicleIds.includes(v.id),
-                            )
-                          )
-                            setDriverId("auto");
-                        }}
+                        onClick={() => setVehicleId(v.id)}
                       >
                         <span className="radio-dot" />
                         <img
@@ -589,68 +554,9 @@ export default function Booking() {
                     );
                   })}
                 </div>
-                <h3 className="form-subheading">Bạn muốn đi cùng ai?</h3>
-                {driversError ? (
-                  <p className="input-hint">
-                    Chưa tải được danh sách tài xế. Bạn có thể để đội xe sắp
-                    xếp.
-                  </p>
-                ) : null}
-                <div className="driver-choices">
-                  <label
-                    className={
-                      "driver-choice " + (driverId === "auto" ? "selected" : "")
-                    }
-                  >
-                    <input
-                      type="radio"
-                      name="driver"
-                      value="auto"
-                      checked={driverId === "auto"}
-                      onChange={() => setDriverId("auto")}
-                    />
-                    <span className="choice-auto">
-                      <ShieldCheck size={21} />
-                    </span>
-                    <span>
-                      <strong>Đội xe sắp xếp giúp tôi</strong>
-                      <small>Tài xế phù hợp với xe và lịch của bạn</small>
-                    </span>
-                  </label>
-                  {drivers
-                    .filter((d) => d.vehicleIds.includes(vehicleId))
-                    .map((d) => (
-                      <label
-                        key={d.id}
-                        className={
-                          "driver-choice " +
-                          (driverId === d.id ? "selected" : "")
-                        }
-                      >
-                        <input
-                          type="radio"
-                          name="driver"
-                          value={d.id}
-                          checked={driverId === d.id}
-                          onChange={() => setDriverId(d.id)}
-                        />
-                        <span
-                          className="choice-avatar"
-                          style={{ background: d.color }}
-                        >
-                          {d.initials}
-                        </span>
-                        <span>
-                          <strong>{d.name}</strong>
-                          <small>{d.intro}</small>
-                        </span>
-                      </label>
-                    ))}
-                </div>
                 <p className="info-note">
                   <Info size={17} />
-                  Lựa chọn xe và tài xế là mong muốn của bạn. Đội xe xác nhận
-                  sau khi kiểm tra lịch.
+                  Đội xe sẽ kiểm tra lịch và xác nhận dòng xe bạn chọn.
                 </p>
                 <div className="form-actions">
                   <button
@@ -735,10 +641,6 @@ export default function Booking() {
                   <div>
                     <span>Xe mong muốn</span>
                     <strong>{vehicle.name}</strong>
-                  </div>
-                  <div>
-                    <span>Tài xế mong muốn</span>
-                    <strong>{driver?.name || "Đội xe sắp xếp"}</strong>
                   </div>
                   <div>
                     <span>Ngày & giờ đón</span>

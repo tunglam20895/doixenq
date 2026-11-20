@@ -57,7 +57,6 @@ const request = {
   customer: "Khách kiểm thử",
   phone: "0900000000",
   note: "AUTOMATED_TEST_ONLY",
-  driverId: "auto",
   passengers: 4,
   departure: new Date(Date.now() + 86400000).toISOString(),
   consent: true,
@@ -101,9 +100,14 @@ const keyed = await post("lookup", {
   id: created.data.id,
   token: created.data.token,
 });
-check("Đường dẫn tra cứu riêng hoạt động", () =>
-  assert.equal(keyed.status, 200),
-);
+check("Đường dẫn tra cứu riêng trả về xe và ẩn thông tin tài xế", () => {
+  assert.equal(keyed.status, 200);
+  assert.equal(keyed.data.booking.vehicleId, "limo");
+  for (const field of ["driverId", "driverName", "driverPhone", "driverAssigned"]) {
+    assert.ok(!(field in keyed.data.booking));
+    assert.ok(!(field in looked.data.bookings.find(b => b.id === created.data.id)));
+  }
+});
 const wrong = await post("lookup", {
   id: created.data.id,
   phone: "0911111111",
@@ -113,14 +117,6 @@ check("Không lộ đơn khi sai số điện thoại", () => {
   assert.deepEqual(wrong.data.bookings, []);
   assert.equal(wrong.data.booking, undefined);
 });
-const mismatch = await post("bookings", {
-  ...request,
-  requestId: randomUUID(),
-  driverId: "hung",
-});
-check("Không cho chọn tài xế không lái dòng xe đó", () =>
-  assert.equal(mismatch.status, 400),
-);
 const tampered = await post("bookings", {
   ...request,
   requestId: randomUUID(),

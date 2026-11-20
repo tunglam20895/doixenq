@@ -26,7 +26,6 @@ import {
   type Booking,
 } from "@/lib/db";
 import { configured } from "@/lib/supabase/backend";
-import { publicDrivers } from "@/lib/drivers";
 import { openAutocomplete, reversePlace } from "@/lib/open-places";
 import { localPlaces } from "@/lib/place-search";
 import { autocomplete, googlePlacesEnabled, placeDetails } from "@/lib/places";
@@ -65,7 +64,6 @@ const bookingSchema = z.object({
       "Số điện thoại Việt Nam chưa hợp lệ.",
     ),
   note: z.string().trim().max(600).default(""),
-  driverId: z.string().max(40).default("auto"),
   passengers: z.number().int().min(1).max(6),
   departure: z.string().datetime(),
   returnAt: z.string().datetime().optional(),
@@ -137,8 +135,6 @@ async function handle(
         { error: "Bạn thao tác quá nhanh. Vui lòng thử lại sau ít phút." },
         429,
       );
-    if (route === "drivers" && req.method === "GET")
-      return json({ drivers: await publicDrivers() });
     if (route === "places" && req.method === "GET") {
       const params = new URL(req.url).searchParams;
       const search = (params.get("q") || "").trim().slice(0, 150);
@@ -313,17 +309,6 @@ async function handle(
           },
           400,
         );
-      const availableDrivers = await publicDrivers();
-      if (
-        input.driverId !== "auto" &&
-        !availableDrivers.some(
-          (d) => d.id === input.driverId && d.vehicleIds.includes(q.vehicleId),
-        )
-      )
-        return json(
-          { error: "Tài xế đã chọn không phục vụ dòng xe này." },
-          400,
-        );
       const b: Booking = {
         id: "NQ-" + randomBytes(4).toString("hex").toUpperCase(),
         token: randomBytes(24).toString("base64url"),
@@ -332,7 +317,7 @@ async function handle(
         phone: input.phone.replace(/^\+84/, "0"),
         note: input.note,
         vehicleId: q.vehicleId,
-        driverId: input.driverId,
+        driverId: "auto",
         passengers: input.passengers,
         departure: input.departure,
         ...(q.roundTrip ? { returnAt: input.returnAt } : {}),
@@ -392,12 +377,7 @@ async function handle(
           },
           404,
         );
-      const { token, requestId, notification, attempts, ...safe } = b;
-      void token;
-      void requestId;
-      void notification;
-      void attempts;
-      return json({ booking: safe });
+      return json({ booking: publicBooking(b) });
     }
     return json({ error: "Không tìm thấy chức năng." }, 404);
   } catch (error) {

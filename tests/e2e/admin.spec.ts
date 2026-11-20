@@ -38,9 +38,6 @@ test("admin quản lý tài xế, ảnh, chuyến hoàn thành và khách hàng 
   await page
     .getByRole("checkbox", { name: "VinFast Limo Green", exact: true })
     .check();
-  await page
-    .getByRole("checkbox", { name: /Hiển thị trên website khách hàng/ })
-    .check();
   const photo = await page.evaluate(() => {
     const c = document.createElement("canvas");
     c.width = 32;
@@ -63,11 +60,12 @@ test("admin quản lý tài xế, ảnh, chuyến hoàn thành và khách hàng 
     .click();
   await expect(page.locator(".admin-dialog")).toHaveCount(0);
   await expect(page.getByRole("heading", { name, exact: true })).toBeVisible();
-  const pub = await (await request.get("/api/drivers")).json();
-  const driver = pub.drivers.find((d: { name: string }) => d.name === name);
+  const { items } = await (await page.request.get("/api/admin/drivers")).json();
+  const driver = items.find((d: { name: string }) => d.name === name);
   expect(driver).toBeTruthy();
-  expect(driver.phone).toBeUndefined();
-  const image = await request.get(driver.avatarUrl);
+  expect((await request.get("/api/drivers")).status()).toBe(404);
+  expect((await request.get(`/api/drivers/${driver.id}/photo`)).status()).toBe(404);
+  const image = await page.request.get(`/api/admin/driver-photo?id=${driver.id}`);
   expect(image.status()).toBe(200);
   expect(image.headers()["content-type"]).toBe("image/webp");
   await page
@@ -147,21 +145,6 @@ test("admin quản lý tài xế, ảnh, chuyến hoàn thành và khách hàng 
     .locator(".admin-sidebar")
     .getByRole("link", { name: "Tài xế", exact: true })
     .click();
-  const card = page.locator(".admin-driver").filter({ hasText: name });
-  await card.getByRole("button", { name: "Chỉnh sửa", exact: true }).click();
-  await page
-    .getByRole("checkbox", { name: /Hiển thị trên website khách hàng/ })
-    .uncheck();
-  await page
-    .getByRole("button", { name: "Lưu thông tin", exact: true })
-    .click();
-  await expect(page.locator(".admin-dialog")).toHaveCount(0);
-  expect((await request.get(driver.avatarUrl)).status()).toBe(404);
-  expect(
-    (
-      await page.request.get("/api/admin/driver-photo?id=" + driver.id)
-    ).status(),
-  ).toBe(200);
   await page.getByRole("button", { name: "Đăng xuất", exact: true }).click();
   await expect(page).toHaveURL(/\/admin\/dang-nhap/);
   expect((await page.request.get("/api/admin/customers")).status()).toBe(401);

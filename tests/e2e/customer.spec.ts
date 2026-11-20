@@ -23,18 +23,20 @@ test("khách lọc xe, đặt và tra cứu; không còn phần 3D", async ({
     ),
   ).toHaveCount(0);
   await page.goto("/dat-xe?from=nhu-quynh&to=noi-bai");
+  await expect(page.getByLabel(/Ngày & giờ đón/)).toHaveValue(/T08:00$/);
   await page
     .getByRole("button", { name: "Xem giá & chọn xe", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Chọn người bạn đồng hành." }),
+    page.getByRole("heading", { name: "Bạn muốn đi xe nào?" }),
   ).toBeVisible();
   await page
     .locator(".booking-vehicle")
     .filter({ hasText: "VinFast VF 6" })
     .click();
-  await page.getByRole("radio", { name: /Đội xe sắp xếp giúp tôi/ }).check();
+  await expect(page.locator('input[name="driver"]')).toHaveCount(0);
   await page.getByRole("button", { name: "Tiếp tục", exact: true }).click();
+  await expect(page.locator(".review-block")).toContainText("VinFast VF 6");
   await expect(
     page.getByRole("heading", { name: "Hẹn giờ, mình đón." }),
   ).toBeVisible();
@@ -97,19 +99,16 @@ test("giao diện điện thoại 320/390 không tràn ngang, ảnh đầy đủ
         () => document.documentElement.scrollWidth <= innerWidth + 1,
       ),
     ).toBe(true);
-    await page.locator(".vehicle-card").last().scrollIntoViewIfNeeded();
-    await page.waitForTimeout(300);
-    expect(
-      await page
-        .locator(".vehicle-card img")
-        .evaluateAll((images) =>
-          images.every(
-            (img) =>
-              (img as HTMLImageElement).complete &&
-              (img as HTMLImageElement).naturalWidth > 0,
+    for (const card of await page.locator(".vehicle-card").all()) {
+      await card.scrollIntoViewIfNeeded();
+      await expect
+        .poll(() =>
+          card.locator("img").evaluate(
+            (img: HTMLImageElement) => img.complete && img.naturalWidth > 0,
           ),
-        ),
-    ).toBe(true);
+        )
+        .toBe(true);
+    }
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
@@ -122,9 +121,10 @@ test("giao diện điện thoại 320/390 không tràn ngang, ảnh đầy đủ
     .getByRole("link", { name: "Bảng giá", exact: true })
     .click();
   await expect(
-    page.getByRole("heading", { name: "Biết giá trước khi đi." }),
+    page.getByRole("heading", { name: "Tham khảo chi phí, an tâm đặt xe." }),
   ).toBeVisible();
   await page.goto("/dat-xe?from=nhu-quynh&to=noi-bai");
+  await expect(page.getByLabel(/Ngày & giờ đón/)).toHaveValue(/T08:00$/);
   expect(
     await page
       .locator(".mobile-book")
@@ -138,16 +138,16 @@ test("giao diện điện thoại 320/390 không tràn ngang, ảnh đầy đủ
       () => document.documentElement.scrollWidth <= innerWidth + 1,
     ),
   ).toBe(true);
+  await page.route("**/api/places/reverse?*", (route) =>
+    route.fulfill({ json: {} }),
+  );
   await page
-    .getByRole("button", { name: "Chọn vị trí trên bản đồ", exact: true })
+    .getByRole("button", { name: "Chọn trên bản đồ", exact: true })
+    .last()
     .click();
-  await expect(page.locator(".booking-map .leaflet-container")).toBeVisible();
-  await page
-    .getByRole("button", { name: "B · Ghim điểm đến", exact: true })
-    .click();
-  await page
-    .locator(".booking-map .leaflet-container")
-    .click({ position: { x: 170, y: 100 } });
+  const picker = page.getByRole("dialog", { name: "Chọn điểm đến" });
+  await picker.locator(".leaflet-container").click({ position: { x: 170, y: 100 } });
+  await picker.getByRole("button", { name: "Xác nhận điểm đến" }).click();
   await expect(
     page.getByRole("combobox", { name: "Điểm đến", exact: true }),
   ).toHaveValue("Điểm đến đã ghim");
@@ -185,11 +185,10 @@ test("tra cứu bằng 9 số cuối, chia chuyến sắp tới và lịch sử"
   await expect(page.getByText("Đã hủy", { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
 });
-test("tiến trình cập nhật khi admin giao và bỏ giao tài xế", async ({ page }) => {
-  let assigned = false;
+test("tra cứu chỉ hiển thị trạng thái chuyến và xe", async ({ page }) => {
   await page.route("**/api/lookup", route => route.fulfill({ json: { bookings: [{
-    id: "NQ-ASSIGNED", status: "confirmed", driverAssigned: assigned,
-    driverName: assigned ? "Nguyễn Văn An" : null, driverPhone: assigned ? "0912345678" : null,
+    id: "NQ-ASSIGNED", status: "confirmed", driverAssigned: true,
+    driverName: "Nguyễn Văn An", driverPhone: "0912345678",
     vehicleId: "limo", passengers: 2, departure: "2026-11-18T01:00:00Z", total: 200000,
     pickup: { name: "Như Quỳnh", address: "Hưng Yên" }, destination: { name: "Nội Bài", address: "Hà Nội" },
   }] } }));
@@ -200,15 +199,7 @@ test("tiến trình cập nhật khi admin giao và bỏ giao tài xế", async 
   await page.getByRole("button", { name: "Tra cứu chuyến xe", exact: true }).click();
   await expect(page.locator('.trip-progress [aria-current="step"]')).toContainText("Đã xác nhận");
   await expect(page.getByRole("region", { name: "Thông tin tài xế" })).toHaveCount(0);
-  assigned = true;
-  await page.clock.fastForward(60000);
-  await expect(page.locator('.trip-progress [aria-current="step"]')).toContainText("Đã giao tài xế");
-  await expect(page.getByRole("heading", { name: "Nguyễn Văn An" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "0912345678" })).toHaveAttribute("href", "tel:0912345678");
-  await expect(page.getByText(/Tài xế sẽ liên hệ với bạn/)).toBeVisible();
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
-  assigned = false;
-  await page.clock.fastForward(60000);
-  await expect(page.locator('.trip-progress [aria-current="step"]')).toContainText("Đã xác nhận");
+  await expect(page.getByText("Nguyễn Văn An")).toHaveCount(0);
+  await expect(page.getByText("Đã giao tài xế")).toHaveCount(0);
   await expect(page.getByRole("link", { name: "0912345678" })).toHaveCount(0);
 });

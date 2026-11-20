@@ -27,11 +27,10 @@ import {
   type Place,
 } from "@/lib/data";
 import PlaceInput from "./PlaceInput";
-import type { PublicDriver } from "@/lib/admin/types";
 const LocationPicker = dynamic(() => import("./LocationPicker"), {
   ssr: false,
 });
-export default function Home({ drivers }: { drivers: PublicDriver[] }) {
+export default function Home() {
   const [mapTarget, setMapTarget] = useState<"pickup" | "destination" | null>(
     null,
   );
@@ -94,7 +93,7 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
               </span>
               <span>
                 <Check size={16} />
-                Chọn xe & tài xế
+                Chọn xe
               </span>
             </div>
             <div className="hero-coordinate">
@@ -379,81 +378,6 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
           </div>
         </div>
       </section>
-      <section className="section drivers-section" id="tai-xe">
-        <div className="wrap">
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">NGƯỜI CẦM LÁI</span>
-              <h2>
-                Biết người đón mình,
-                <br />
-                trước khi lên xe.
-              </h2>
-            </div>
-            <p>
-              Bạn có thể chọn tài xế mong muốn.
-              <br />
-              Đội xe sẽ kiểm tra lịch và xác nhận lại.
-            </p>
-          </div>
-          {!drivers.length ? (
-            <p className="driver-empty-note">
-              Đội xe đang cập nhật hồ sơ tài xế. Bạn vẫn có thể đặt chuyến; đội
-              xe sẽ sắp xếp tài xế phù hợp và xác nhận với bạn.
-            </p>
-          ) : null}
-          <div className="drivers-grid">
-            {drivers.map((d, i) => (
-              <article className="driver-card" key={d.id}>
-                <div className="driver-header">
-                  <span
-                    className="driver-avatar"
-                    style={{ background: d.color }}
-                  >
-                    {d.avatarUrl ? (
-                      <img
-                        src={d.avatarUrl}
-                        alt={d.name}
-                        width={67}
-                        height={67}
-                        loading="lazy"
-                      />
-                    ) : (
-                      d.initials
-                    )}
-                  </span>
-                  <span className="driver-badge">
-                    <ShieldCheck size={15} />
-                    Hồ sơ tài xế
-                  </span>
-                </div>
-                <h3>{d.name}</h3>
-                <p>{d.intro}</p>
-                <span className="driver-area">
-                  <MapPin size={14} />
-                  {d.area}
-                </span>
-                <div className="driver-models">
-                  {d.vehicleIds.map((id) => (
-                    <span key={id}>
-                      {VEHICLES.find((v) => v.id === id)?.name.replace(
-                        "VinFast ",
-                        "",
-                      )}
-                    </span>
-                  ))}
-                </div>
-                <Link
-                  className="text-link"
-                  href={`/dat-xe?driver=${d.id}&vehicle=${d.vehicleIds[0]}`}
-                >
-                  Chọn tài xế <ArrowUpRight size={17} />
-                </Link>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
       <section
         className="section process-section"
         data-moment="pinned-chapters"
@@ -475,7 +399,7 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
                 },
                 {
                   title: "Bạn chọn xe và người lái",
-                  text: "Xem dòng xe, số chỗ và tài xế mong muốn. Gửi thông tin để đội xe kiểm tra lịch.",
+                  text: "Chọn dòng xe phù hợp với số khách. Gửi thông tin để đội xe kiểm tra lịch.",
                   image: "ertiga-black",
                 },
                 {
@@ -528,8 +452,8 @@ export default function Home({ drivers }: { drivers: PublicDriver[] }) {
                 `${ESTIMATED_FARE_NOTE} ${FARE_EXCLUSIONS}`,
               ],
               [
-                "Tôi có được chọn đúng xe và tài xế không?",
-                "Bạn có thể gửi lựa chọn mong muốn. Đội xe kiểm tra lịch thực tế rồi xác nhận; gửi yêu cầu chưa đồng nghĩa xe đã được giữ chỗ.",
+                "Tôi có thể chọn dòng xe không?",
+                "Bạn có thể chọn dòng xe khi đặt chuyến. Đội xe kiểm tra lịch thực tế rồi xác nhận; gửi yêu cầu chưa đồng nghĩa xe đã được giữ chỗ.",
               ],
               [
                 "Tôi cần cài ứng dụng hay tạo tài khoản không?",

@@ -12,7 +12,6 @@ import {
   ShieldCheck,
   Users,
   Loader2,
-  Phone,
 } from "lucide-react";
 import { VEHICLES, money, tripDate } from "@/lib/data";
 import { groupBookings, type PublicBooking } from "@/lib/booking-lookup";
@@ -236,9 +235,7 @@ function BookingCard({ booking }: { booking: PublicBooking }) {
         ) : (
           <CheckCircle2 size={16} />
         )}{" "}
-        {booking.status === "confirmed" && booking.driverAssigned
-          ? "Đã giao tài xế"
-          : status[booking.status]}
+        {status[booking.status]}
       </div>
       <TripProgress booking={booking} />
       <div className="result-title">
@@ -287,53 +284,7 @@ function BookingCard({ booking }: { booking: PublicBooking }) {
             </strong>
           </span>
         </div>
-        <div>
-          <ShieldCheck size={18} />
-          <span>
-            {booking.driverAssigned ? "Tài xế phụ trách" : "Tài xế"}
-            <strong>
-              {booking.driverAssigned
-                ? booking.driverName || "Đội xe đang cập nhật"
-                : "Đang sắp xếp tài xế"}
-            </strong>
-          </span>
-        </div>
       </div>
-      {booking.driverAssigned ? (
-        <section className="assigned-driver" aria-label="Thông tin tài xế">
-          <div>
-            <ShieldCheck size={22} />
-            <div>
-              <span>Tài xế phụ trách chuyến của bạn</span>
-              <h3>{booking.driverName || "Đội xe đang cập nhật"}</h3>
-            </div>
-          </div>
-          {booking.driverPhone && /^[+\d\s().-]+$/.test(booking.driverPhone) ? (
-            <a
-              className="btn btn-secondary"
-              href={`tel:${booking.driverPhone.replace(/[^+\d]/g, "")}`}
-            >
-              <Phone size={17} />
-              {booking.driverPhone}
-            </a>
-          ) : (
-            <p>Số điện thoại tài xế đang được cập nhật.</p>
-          )}
-          {booking.status === "confirmed" || booking.status === "requested" ? (
-            <p>
-              Tài xế sẽ liên hệ với bạn để xác nhận giờ đón, điểm đón và thông
-              tin chuyến đi. Vui lòng giữ điện thoại; bạn cũng có thể gọi trực
-              tiếp cho tài xế.
-            </p>
-          ) : null}
-        </section>
-      ) : booking.status === "confirmed" ? (
-        <p className="info-note">
-          <Clock size={18} />
-          Chuyến đã được xác nhận. Đội xe đang sắp xếp tài xế và sẽ cập nhật
-          thông tin tại đây.
-        </p>
-      ) : null}
       {booking.note ? (
         <div className="booking-note">
           <small>Ghi chú của bạn</small>
@@ -367,16 +318,10 @@ function TripProgress({ booking }: { booking: PublicBooking }) {
       <p className="trip-cancelled">Chuyến đã hủy. Hành trình này đã dừng.</p>
     );
   const current =
-    booking.status === "completed"
-      ? 2
-      : booking.driverAssigned
-        ? 1
-        : booking.status === "requested"
-          ? -1
-          : 0;
+    booking.status === "completed" ? 2 : booking.status === "confirmed" ? 1 : 0;
   return (
     <ol className="trip-progress" aria-label="Tiến trình chuyến xe">
-      {["Đã xác nhận", "Đã giao tài xế", "Hoàn thành"].map((label, index) => (
+      {["Đã nhận yêu cầu", "Đã xác nhận", "Hoàn thành"].map((label, index) => (
         <li
           key={label}
           className={index <= current ? "reached" : ""}

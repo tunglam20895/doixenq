@@ -22,9 +22,9 @@ Node.js 24+. `.env.local` của máy hiện tại đã cấu hình project Supab
 
 ## Khách hàng
 
-Chọn xe 5–7 chỗ, hành trình, giờ đón, tài xế đang công khai; ghim bản đồ, xem giá mẫu, đặt xe được xác nhận ngay; tra cứu bằng số điện thoại khớp 9 số cuối hoặc khóa riêng. Tra cứu chia Chuyến sắp tới và Chuyến đã đi; lịch sử có nhãn riêng cho chuyến hủy. Ertiga dùng ảnh đen. Đã bỏ mô hình 3D, gallery 3D và bệ phối cảnh.
+Chọn xe 5–7 chỗ, hành trình, giờ đón; ghim bản đồ, xem giá mẫu, đặt xe được xác nhận ngay; tra cứu bằng số điện thoại khớp 9 số cuối hoặc khóa riêng. Tra cứu chia Chuyến sắp tới và Chuyến đã đi; lịch sử có nhãn riêng cho chuyến hủy. Ertiga dùng ảnh đen. Đã bỏ mô hình 3D, gallery 3D và bệ phối cảnh.
 
-Danh sách tài xế lấy từ Supabase, không cần sửa code sau khi cập nhật qua admin. Tài xế tạm nghỉ hoặc không công khai không hiển thị cho khách. Số điện thoại tài xế và ghi chú nội bộ không nằm trong phản hồi công khai. Chưa nhập hồ sơ thì khách vẫn chọn được “Đội xe sắp xếp”.
+Hồ sơ và thông tin phân công tài xế chỉ dùng trong trang quản trị.
 
 Xe, bảng giá và gợi ý địa điểm vẫn nằm ở `lib/data.ts`. Giá mẫu theo bậc km; phí chờ/cầu đường/bãi đỗ chưa bao gồm. Bản đồ mặc định OSM/OSRM; có thể cấu hình cặp khóa Google như `.env.example`. Phần ảnh xe là ảnh hãng/đại lý, không phải ảnh đội xe thực tế.
 
@@ -33,7 +33,7 @@ Xe, bảng giá và gợi ý địa điểm vẫn nằm ở `lib/data.ts`. Giá 
 - **Tổng quan:** số khách, tài xế hoạt động, chuyến đã đặt/hoàn thành/hủy, doanh thu và biểu đồ 7 ngày.
 - **Khách hàng:** thêm/sửa tên, số điện thoại và ghi chú; tìm kiếm; xem lịch sử, số chuyến đã đi, tổng tiền. Chuẩn hóa +84 về 0, chặn hai hồ sơ trùng số điện thoại.
 - **Chuyến đi:** danh sách, lọc và tìm kiếm; nhập chuyến nhận qua điện thoại; phân công tài xế; đổi Đã đặt / Hoàn thành / Đã hủy; ghi số tiền thực tế, lý do cập nhật; xem lịch sử thao tác.
-- **Tài xế:** thêm/sửa hồ sơ, ảnh, điện thoại, khu vực, biển số, dòng xe, ghi chú; trạng thái hoạt động và công khai độc lập.
+- **Tài xế:** thêm/sửa hồ sơ, ảnh, điện thoại, khu vực, biển số, dòng xe, ghi chú; trạng thái hoạt động.
 - **Cài đặt:** đổi mật khẩu; thu hồi các phiên khác khi đổi mật khẩu; đăng xuất thu hồi phiên hiện tại trong database.
 
 “Đã đi” và tổng tiền khách chỉ tính **chuyến hoàn thành**, theo số tiền thực tế. Đánh dấu hoàn thành lại không cộng trùng. Chuyển sang hủy loại tiền khỏi thống kê; chuyển lại hoàn thành tính lại theo dữ liệu hiện tại. Biểu đồ dùng ngày hoàn thành theo giờ Việt Nam. Đây là doanh thu theo chuyến, chưa phải đối soát tiền đã thu.
@@ -112,4 +112,4 @@ Kiểm tra địa điểm thật (không tạo đơn): `npm run test:places`. Đ
 
 - `VIETMAP_API_KEY` (server-only): bật Autocomplete/Place/Reverse v4 cho địa điểm Việt Nam; cần key của chủ dự án, không dùng key demo. Tra cứu v4 giữ nguyên ref_id và tọa độ khách ghim.
 - Nếu không có VIETMAP: giữ Google khi đã cấu hình, hoặc Photon/OpenStreetMap hiện tại. GPS và ghim đều gọi reverse lookup, giữ tên và địa chỉ riêng. Cho bổ sung tên cổng/lối vào khi dữ liệu bản đồ chưa đủ.
-- Admin phân công được tài xế hoạt động kể cả khác dòng xe đăng ký, có cảnh báo để điều phối kiểm tra xe thực tế; lựa chọn tài xế trên trang khách vẫn lọc theo dòng xe.
+- Admin phân công được tài xế hoạt động kể cả khác dòng xe đăng ký, có cảnh báo để điều phối kiểm tra xe thực tế.

@@ -38,7 +38,7 @@ export default function Drivers() {
       <PageHeader
         label="TÀI XẾ"
         title="Người đồng hành của đội xe."
-        description="Cập nhật hồ sơ, xe phụ trách và thông tin hiển thị cho khách."
+        description="Cập nhật hồ sơ và xe phụ trách để điều phối chuyến."
         action={
           <button
             className="admin-btn primary"
@@ -110,9 +110,7 @@ export default function Drivers() {
                 ))}
               </div>
               <div className="admin-driver-bottom">
-                <span>
-                  {d.published ? "Hiển thị cho khách" : "Chỉ hiển thị nội bộ"}
-                </span>
+                <span>Chỉ hiển thị nội bộ</span>
                 <button
                   className="admin-btn subtle"
                   onClick={() => setEditing(d)}
@@ -127,7 +125,7 @@ export default function Drivers() {
       ) : (
         <Empty
           title="Chưa có tài xế phù hợp"
-          description="Thêm hồ sơ tài xế để phân công chuyến và hiển thị trên website khách."
+          description="Thêm hồ sơ tài xế để phân công chuyến."
         />
       )}
       {editing !== undefined ? (
@@ -159,7 +157,6 @@ function DriverForm({
     [plate, setPlate] = useState(driver?.plate || ""),
     [note, setNote] = useState(driver?.note || ""),
     [active, setActive] = useState(driver?.active ?? true),
-    [published, setPublished] = useState(driver?.published ?? false),
     [vehicles, setVehicles] = useState<string[]>(driver?.vehicle_ids || []),
     [avatar, setAvatar] = useState<string | null | undefined>(undefined),
     [busy, setBusy] = useState(false),
@@ -219,7 +216,7 @@ function DriverForm({
         plate,
         note,
         active,
-        published,
+        published: false,
         vehicle_ids: vehicles,
         ...(avatar !== undefined ? { avatar_data: avatar } : {}),
       });
@@ -371,17 +368,6 @@ function DriverForm({
               <small>
                 Tắt khi tài xế tạm nghỉ; lịch sử chuyến vẫn được giữ.
               </small>
-            </span>
-          </label>
-          <label>
-            <input
-              type="checkbox"
-              checked={published}
-              onChange={(e) => setPublished(e.target.checked)}
-            />
-            <span>
-              <strong>Hiển thị trên website khách hàng</strong>
-              <small>Chỉ hiển thị khi tài xế đang hoạt động.</small>
             </span>
           </label>
         </div>

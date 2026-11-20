@@ -6,14 +6,35 @@ export function phoneSuffix(value: string) {
 }
 export type PublicBooking = Omit<
   Booking,
-  "token" | "requestId" | "notification" | "attempts"
+  | "token"
+  | "requestId"
+  | "notification"
+  | "attempts"
+  | "driverId"
+  | "driverName"
+  | "driverPhone"
+  | "driverAssigned"
 >;
 export function publicBooking(b: Booking): PublicBooking {
-  const { token, requestId, notification, attempts, ...safe } = b;
+  const {
+    token,
+    requestId,
+    notification,
+    attempts,
+    driverId,
+    driverName,
+    driverPhone,
+    driverAssigned,
+    ...safe
+  } = b;
   void token;
   void requestId;
   void notification;
   void attempts;
+  void driverId;
+  void driverName;
+  void driverPhone;
+  void driverAssigned;
   return safe;
 }
 export function groupBookings<T extends Pick<Booking, "status" | "departure">>(

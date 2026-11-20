@@ -64,19 +64,8 @@ const driver = {
 };
 r = await call("drivers", driver);
 ok("Tạo hồ sơ tài xế trong Supabase", () => assert.equal(r.status, 200));
-let pub = await (await fetch(base + "/api/drivers")).json();
-ok("Tài xế nội bộ chưa xuất hiện trên web khách", () =>
-  assert.ok(!pub.drivers.some((d) => d.id === driver.id)),
-);
-r = await call("drivers", { ...driver, published: true });
-assert.equal(r.status, 200);
-pub = await (await fetch(base + "/api/drivers")).json();
-ok("Công khai tài xế và không lộ số điện thoại/ghi chú", () => {
-  const d = pub.drivers.find((d) => d.id === driver.id);
-  assert.ok(d);
-  assert.equal(d.phone, undefined);
-  assert.equal(d.note, undefined);
-});
+assert.equal((await fetch(base + "/api/drivers")).status, 404);
+assert.equal((await fetch(base + "/api/drivers/" + driver.id + "/photo")).status, 404);
 r = await call("customers", {
   name: "QA Khách Admin",
   phone: "0900000012",
@@ -193,20 +182,19 @@ const publicLookup = await fetch(base + "/api/lookup", {
     "Content-Type": "application/json",
     "x-forwarded-for": randomUUID(),
   },
-  body: JSON.stringify({ id: trip.id, phone: customer.phone }),
+  body: JSON.stringify({ phone: customer.phone }),
 });
-const lookup = await publicLookup.json();
+const { bookings } = await publicLookup.json();
 ok("Khách tra cứu thấy trạng thái và số tiền thực tế đã cập nhật", () => {
   assert.equal(publicLookup.status, 200);
-  assert.equal(lookup.booking.status, "completed");
-  assert.equal(lookup.booking.actualTotal, 230000);
+  const booking = bookings.find((b) => b.id === trip.id);
+  assert.equal(booking.status, "completed");
+  assert.equal(booking.actualTotal, 230000);
+  for (const field of ["driverId", "driverName", "driverPhone", "driverAssigned"])
+    assert.ok(!(field in booking));
 });
 r = await call("drivers", { ...driver, published: true, active: false });
 assert.equal(r.status, 200);
-pub = await (await fetch(base + "/api/drivers")).json();
-ok("Tài xế tạm nghỉ được ẩn khỏi web khách", () =>
-  assert.ok(!pub.drivers.some((d) => d.id === driver.id)),
-);
 const s = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_PUBLISHABLE_KEY,

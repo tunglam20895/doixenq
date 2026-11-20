@@ -14,16 +14,6 @@ export type Driver = {
   created_at: string;
   updated_at: string;
 };
-export type PublicDriver = {
-  id: string;
-  name: string;
-  initials: string;
-  color: string;
-  vehicleIds: string[];
-  intro: string;
-  area: string;
-  avatarUrl?: string;
-};
 export type Customer = {
   id: string;
   name: string;

@@ -136,7 +136,7 @@ export default function Page() {
           <p>
             Website có lựa chọn xe 5 chỗ và 7 chỗ. Hãy xem số hành khách tối đa
             của từng dòng xe và ghi chú số người, hành lý hoặc nhu cầu riêng. Xe
-            và tài xế thực tế phụ thuộc lịch được đội xe xác nhận.
+            thực tế phụ thuộc lịch được đội xe xác nhận.
           </p>
           <Link href="/dat-xe">Chọn điểm đón tại Như Quỳnh</Link>
         </article>
